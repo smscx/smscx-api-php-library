@@ -1,0 +1,479 @@
+<?php
+/**
+ * TransliterationAppSettings
+ *
+ * PHP version 7.4
+ *
+ * @category Class
+ * @package  Smscx
+ * @author   SMS Connexion
+ * @link     https://sms.cx
+ */
+
+namespace Smscx\Client\Model;
+
+use \ArrayAccess;
+use \Smscx\ObjectSerializer;
+
+/**
+ * TransliterationAppSettings Class Doc Comment
+ *
+ * @category Class
+ * @package  Smscx
+ * @author   SMS Connexion
+ * @link     https://sms.cx
+ * @implements \ArrayAccess<string, mixed>
+ */
+class TransliterationAppSettings implements ModelInterface, ArrayAccess, \JsonSerializable
+{
+    public const DISCRIMINATOR = null;
+
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $clientModelName = 'TransliterationAppSettings';
+
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $clientTypes = [
+        'alphabet' => 'string',
+        'remove_emojis' => 'bool'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
+      */
+    protected static $clientFormats = [
+        'alphabet' => null,
+        'remove_emojis' => null
+    ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $clientNullables = [
+        'alphabet' => false,
+		'remove_emojis' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $clientNullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function clientTypes()
+    {
+        return self::$clientTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function clientFormats()
+    {
+        return self::$clientFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function clientNullables(): array
+    {
+        return self::$clientNullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getClientNullablesSetToNull(): array
+    {
+        return $this->clientNullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::clientNullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getClientNullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'alphabet' => 'alphabet',
+        'remove_emojis' => 'removeEmojis'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'alphabet' => 'setAlphabet',
+        'remove_emojis' => 'setRemoveEmojis'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'alphabet' => 'getAlphabet',
+        'remove_emojis' => 'getRemoveEmojis'
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$clientModelName;
+    }
+
+    public const ALPHABET_NONE = 'NONE';
+    public const ALPHABET_NON_GSM = 'NON_GSM';
+    public const ALPHABET_POLISH = 'POLISH';
+    public const ALPHABET_TURKISH = 'TURKISH';
+    public const ALPHABET_GREEK = 'GREEK';
+    public const ALPHABET_ROMANIAN = 'ROMANIAN';
+    public const ALPHABET_RUSSIAN_CYRILLIC = 'RUSSIAN_CYRILLIC';
+    public const ALPHABET_BULGARIAN_CYRILLIC = 'BULGARIAN_CYRILLIC';
+    public const ALPHABET_UKRAINIAN_CYRILLIC = 'UKRAINIAN_CYRILLIC';
+    public const ALPHABET_BELARUSIAN_CYRILLIC = 'BELARUSIAN_CYRILLIC';
+    public const ALPHABET_SERBIAN_CYRILLIC = 'SERBIAN_CYRILLIC';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAlphabetAllowableValues()
+    {
+        return [
+            self::ALPHABET_NONE,
+            self::ALPHABET_NON_GSM,
+            self::ALPHABET_POLISH,
+            self::ALPHABET_TURKISH,
+            self::ALPHABET_GREEK,
+            self::ALPHABET_ROMANIAN,
+            self::ALPHABET_RUSSIAN_CYRILLIC,
+            self::ALPHABET_BULGARIAN_CYRILLIC,
+            self::ALPHABET_UKRAINIAN_CYRILLIC,
+            self::ALPHABET_BELARUSIAN_CYRILLIC,
+            self::ALPHABET_SERBIAN_CYRILLIC,
+        ];
+    }
+
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        $this->setIfExists('alphabet', $data ?? [], null);
+        $this->setIfExists('remove_emojis', $data ?? [], false);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->clientNullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->clientNullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        if ($this->container['alphabet'] === null) {
+            $invalidProperties[] = "'alphabet' can't be null";
+        }
+        $allowedValues = $this->getAlphabetAllowableValues();
+        if (!is_null($this->container['alphabet']) && !in_array($this->container['alphabet'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'alphabet', must be one of '%s'",
+                $this->container['alphabet'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['remove_emojis'] === null) {
+            $invalidProperties[] = "'remove_emojis' can't be null";
+        }
+        return $invalidProperties;
+    }
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    /**
+     * Gets alphabet
+     *
+     * @return string
+     */
+    public function getAlphabet()
+    {
+        return $this->container['alphabet'];
+    }
+
+    /**
+     * Sets alphabet
+     *
+     * @param string $alphabet alphabet
+     *
+     * @return self
+     */
+    public function setAlphabet($alphabet)
+    {
+        $allowedValues = $this->getAlphabetAllowableValues();
+        if (!in_array($alphabet, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'alphabet', must be one of '%s'",
+                    $alphabet,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($alphabet)) {
+            throw new \InvalidArgumentException('non-nullable alphabet cannot be null');
+        }
+
+        $this->container['alphabet'] = $alphabet;
+
+        return $this;
+    }
+
+    /**
+     * Gets remove_emojis
+     *
+     * @return bool
+     */
+    public function getRemoveEmojis()
+    {
+        return $this->container['remove_emojis'];
+    }
+
+    /**
+     * Sets remove_emojis
+     *
+     * @param bool $remove_emojis remove_emojis
+     *
+     * @return self
+     */
+    public function setRemoveEmojis($remove_emojis)
+    {
+
+        if (is_null($remove_emojis)) {
+            throw new \InvalidArgumentException('non-nullable remove_emojis cannot be null');
+        }
+
+        $this->container['remove_emojis'] = $remove_emojis;
+
+        return $this;
+    }
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset): bool
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed|null
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
+    {
+        return $this->container[$offset] ?? null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value): void
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset): void
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
+
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue()
+    {
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+}
+
+

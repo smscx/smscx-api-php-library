@@ -1,0 +1,42 @@
+{
+    "name": "smscx/smscx-api-php-library",
+    "version": "0.1.0",
+    "description": "Client for SMS.CX API",
+    "keywords": [
+        "sms",
+        "sms messaging",
+        "otp",
+		"validate numbers",
+		"rent numbers",
+		"bulk sms",
+        "php",
+        "sdk",
+        "client",
+        "rest",
+        "api"
+    ],
+    "homepage": "https://sms.cx",
+    "license": "Apache-2.0",
+    "authors": [{
+        "name": "SMS Connexion",
+        "homepage": "https://sms.cx"
+    }],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.3",
+        "guzzlehttp/psr7": "^1.7 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0 || ^9.0",
+        "friendsofphp/php-cs-fixer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": { "Smscx\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Smscx\\Test\\": "test/" }
+    }
+}
