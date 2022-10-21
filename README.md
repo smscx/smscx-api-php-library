@@ -1,6 +1,6 @@
 # smscx-api-php-library
 
-![SMS Connexion + PHP logo](https://sms.cx/assets/img/sms-connexion-logo-smscx+php-x2.png)
+![SMS Connexion + PHP logo](https://sms.cx/assets/img/sms-connexion-logo-smscx-x2.png)
 
 The SMS Connexion API PHP library provides convenient access to the SMS API of SMS.CX from applications written in the PHP language.
 
