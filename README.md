@@ -1,5 +1,7 @@
 # smscx-api-php-library
 
+![SMS Connexion logo](https://sms.cx/assets/img/sms-connexion-logo-smscx.png)
+
 The SMS Connexion API PHP library provides convenient access to the SMS API of SMS.CX from applications written in the PHP language.
 
 Using this library you can send SMS, create groups of contacts, import contacts, validate phone numbers, lookup phone numbers, generate OTP, create short links, and more.
