@@ -63,8 +63,8 @@ class OriginalNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $clientNullables = [
-        'name' => false,
-		'mnc' => false
+        'name' => true,
+		'mnc' => true
     ];
 
     /**
@@ -297,7 +297,14 @@ class OriginalNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            array_push($this->clientNullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['name'] = $name;
@@ -326,7 +333,14 @@ class OriginalNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($mnc)) {
-            throw new \InvalidArgumentException('non-nullable mnc cannot be null');
+            array_push($this->clientNullablesSetToNull, 'mnc');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('mnc', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['mnc'] = $mnc;

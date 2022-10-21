@@ -83,7 +83,7 @@ class DataOptouts implements ModelInterface, ArrayAccess, \JsonSerializable
 		'optout_from' => false,
 		'campaign_id' => true,
 		'group_id' => true,
-		'group_name' => false,
+		'group_name' => true,
 		'campaign_name' => true,
 		'datetime' => false
     ];
@@ -614,7 +614,14 @@ class DataOptouts implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($group_name)) {
-            throw new \InvalidArgumentException('non-nullable group_name cannot be null');
+            array_push($this->clientNullablesSetToNull, 'group_name');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('group_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['group_name'] = $group_name;

@@ -69,11 +69,11 @@ class RoamingNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $clientNullables = [
-        'country_iso' => false,
-		'country_name' => false,
-		'mcc' => false,
-		'mnc' => false,
-		'name' => false
+        'country_iso' => true,
+		'country_name' => true,
+		'mcc' => true,
+		'mnc' => true,
+		'name' => true
     ];
 
     /**
@@ -342,7 +342,14 @@ class RoamingNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
         if (is_null($country_iso)) {
-            throw new \InvalidArgumentException('non-nullable country_iso cannot be null');
+            array_push($this->clientNullablesSetToNull, 'country_iso');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('country_iso', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['country_iso'] = $country_iso;
@@ -371,7 +378,14 @@ class RoamingNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($country_name)) {
-            throw new \InvalidArgumentException('non-nullable country_name cannot be null');
+            array_push($this->clientNullablesSetToNull, 'country_name');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('country_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['country_name'] = $country_name;
@@ -400,7 +414,14 @@ class RoamingNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($mcc)) {
-            throw new \InvalidArgumentException('non-nullable mcc cannot be null');
+            array_push($this->clientNullablesSetToNull, 'mcc');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('mcc', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['mcc'] = $mcc;
@@ -429,7 +450,14 @@ class RoamingNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($mnc)) {
-            throw new \InvalidArgumentException('non-nullable mnc cannot be null');
+            array_push($this->clientNullablesSetToNull, 'mnc');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('mnc', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['mnc'] = $mnc;
@@ -458,7 +486,14 @@ class RoamingNetwork implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            array_push($this->clientNullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getClientNullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setClientNullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['name'] = $name;
