@@ -196,7 +196,7 @@ $send_sms_message_request = [
         '+3069125917xx',
     ],
     'from' => 'InfoText',
-    'text' => 'Redeem this voucher and you will get 30% discount off all Summer Fashion ',
+    'text' => 'Redeem this voucher and you will get 30% discount off all Summer Fashion {{optoutLink}}',
     'allowInvalid' => true,
     'transliteration' => [
         'alphabet' => 'NON_GSM',
