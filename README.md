@@ -605,7 +605,7 @@ dev@sms.cx
 ## About this package
 
 - Client library version: `0.1.0`
-- API version: `1.0.1`
+- API version: `1.0.2`
 
 ## License
 
