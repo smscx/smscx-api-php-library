@@ -357,7 +357,9 @@ try {
 
 ## Documentation 
 Full documentation of the API is available [here](https://sms.cx/sms-api-documentation/).  
+
 The [docs folder](/docs) provides detailed guides for using this library (methods, models, examples).
+
 The [examples folder](/examples) provides an example for each method.
 
 
