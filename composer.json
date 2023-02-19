@@ -1,6 +1,6 @@
 {
     "name": "smscx/smscx-api-php-library",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Client for SMS.CX API",
     "keywords": [
         "sms",
