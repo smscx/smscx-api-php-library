@@ -51,6 +51,8 @@ try {
         // $v->getText();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ApiException $e) {

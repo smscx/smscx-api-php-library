@@ -62,6 +62,8 @@ try {
     $result = $smscx->createTemplate($templates_new_request);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\DuplicateValueException $e) {
     //Code for duplicate value    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -135,6 +137,8 @@ try {
     $result = $smscx->deleteTemplate($template_id);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Template ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -215,7 +219,9 @@ try {
         // $v->getCreatedAt();
         // $v->getApproved();
         // $v->getLocked();
-    }    
+    }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Template ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -361,6 +367,8 @@ try {
     $result = $smscx->updateTemplate($template_id, $templates_update_request);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Template ID not found    
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {

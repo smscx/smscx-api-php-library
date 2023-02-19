@@ -21,6 +21,8 @@ try {
     // $result->getExpiresIn();
     // $result->getTokenType();
     // $result->getScope();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request
 } catch (Smscx\Client\Exception\InvalidCredentialsException $e) {

@@ -7,6 +7,9 @@
 | [**getSingleLookupStatus()**](NumbersApi.md#getSingleLookupStatus) | **GET** /numbers/lookup/lookupId/{lookupId} | Get Single Lookup result |
 | [**lookupNumber()**](NumbersApi.md#lookupNumber) 💰 | **GET** /numbers/lookup/{phoneNumber} | Lookup number |
 | [**lookupNumbers()**](NumbersApi.md#lookupNumbers) 💰 | **POST** /numbers/lookup | Lookup numbers in bulk |
+| [**getBulkLookupCampaigns()**](NumbersApi.md#getBulkLookupCampaigns) | **GET** /numbers/lookup | Get list of bulk lookup campaigns |
+| [**exportNumberLookupReportToCSV()**](NumbersApi.md#exportNumberLookupReportToCSV) | **GET** /numbers/lookup/lookupBulkId/{lookupBulkId}/csv | Export number lookup campaign to CSV |
+| [**exportNumberLookupReportToXLSX()**](NumbersApi.md#exportNumberLookupReportToXLSX) | **GET** /numbers/lookup/lookupBulkId/{lookupBulkId}/xlsx | Export number lookup campaign to XLSX |
 | [**validateNumber()**](NumbersApi.md#validateNumber) | **GET** /numbers/validate/{phoneNumber} | Validate number |
 | [**validateNumbers()**](NumbersApi.md#validateNumbers) | **POST** /numbers/validate | Validate numbers in bulk |
 | [**getAvailableNumbers()**](NumbersApi.md#getAvailableNumbers) | **GET** /numbers/rent/available/{countryIso} | Get available numbers for rent |
@@ -16,6 +19,7 @@
 | [**getRentStatus()**](NumbersApi.md#getRentStatus) | **GET** /numbers/rent/{rentId} | Get status of rent |
 | [**getRentedNumbers()**](NumbersApi.md#getRentedNumbers) | **GET** /numbers/rent | Get list of your rented numbers |
 | [**getInboundSms()**](NumbersApi.md#getInboundSms) | **GET** /numbers/rent/{rentId}/inbound | Get inbound SMS from rented number |
+| [**editRentSettings()**](NumbersApi.md#editRentSettings) | **PATCH** /numbers/rent/{rentId}/edit | Edit settings for active rent |
 
 ## `getBulkLookupStatus()`
 
@@ -28,6 +32,7 @@ getBulkLookupStatus($lookup_bulk_id): \Smscx\Client\Model\NumbersBulkLookupResul
 Get details of a bulk phone number lookup.        
 
 ### Errors for GET `/numbers/lookup/lookupBulkId/{lookupBulkId}`  
+
 | HTTP code  | Error code  | Type  | Description  |  
 |:------------:|:------------:|:------------:| ------------ |  
 | 400 | 1218 | not_found | The lookupBulkId provided is invalid |  
@@ -58,6 +63,8 @@ $lookup_bulk_id = '68aa4d9f-ee25-4a32-95d0-7272efe3b238';
 try {
     $result = $smscx->getBulkLookupStatus($lookup_bulk_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Lookup Bulk ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -131,6 +138,8 @@ $lookup_id = '68aa4d9f-ee25-4a32-95d0-7272efe3b238';
 try {
     $result = $smscx->getSingleLookupStatus($lookup_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Lookup ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -237,6 +246,8 @@ try {
     // $result->getData()->getPortedNetwork();
     // $result->getData()->getRoamingNetwork();
     // $result->getData()->getDatetime();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
     //Code for Invalid phone number
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -338,7 +349,6 @@ $smscx = new Smscx\Client\Api\NumbersApi(
 $numbers_lookup_request = [
     'phoneNumbers' => ['+336124241xx','+336123','+336129564xx','+336124241xx','+420604558xx','+336129564xx','+336123345xx','+4474006505xx','+49151237483xx','+49151286205xx','+4206018488xx','+49151232142xx','+3934237620xx'],
     //'countryIso' => 'FR',
-    'allowInvalid' => true,
     'lookupCallbackUrl' => 'https://my-callback-url/receive-lookup-details',
 ];
 
@@ -351,6 +361,8 @@ try {
     // $result->getInfo()->getTotalInvalid();
     // $result->getInfo()->getCost();
     // $result->getInfo()->getInvalid();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
     //Code for Invalid phone number
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -382,6 +394,237 @@ try {
 
 - **Content-Type**: `application/json`
 - **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getBulkLookupCampaigns()`
+
+```php
+getBulkLookupCampaigns($limit, $next, $previous): \Smscx\Client\Model\BulkLookupCampaignsResponse
+```
+
+**Get list of bulk lookup campaigns**
+
+Get list of bulk lookup campaigns
+
+### Example
+
+```php
+<?php
+
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Use authentication via API Key
+$config = Smscx\Configuration::getDefaultConfiguration()->setApiKey('YOUR_API_KEY');
+
+// OR
+
+// Use authentication via Access Token
+// $config = Smscx\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$smscx = new Smscx\Client\Api\NumbersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$limit = 100; // int | A limit on the number of objects to be returned
+$next = null; // string | The next token used to retrieve additional data
+$previous = null; // string | The previous token used to retrieve additional data
+
+try {
+    $result = $smscx->getBulkLookupCampaigns($limit, $next, $previous);
+    print_r($result);
+    foreach ( $result->getData() as $k => $v ) {
+        // $v->getId();
+        // $v->getTotalPhoneNumbers();
+        // $v->getTotalValid();
+        // $v->getTotalCost();
+        // $v->getDatetimeAdded();
+    }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
+} catch (Smscx\Client\Exception\ApiException $e) {
+    echo 'Exception when calling NumbersApi->getBulkLookupCampaigns: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **limit** | **int**| A limit on the number of objects to be returned | [optional] [default to 500] |
+| **next** | **string**| The next token used to retrieve additional data | [optional] |
+| **previous** | **string**| The previous token used to retrieve additional data | [optional] |
+
+### Return type
+
+[**\Smscx\Client\Model\BulkLookupCampaignsResponse**](../Model/BulkLookupCampaignsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth), [BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `exportNumberLookupReportToCSV()`
+
+```php
+exportNumberLookupReportToCSV($lookup_bulk_id): string
+```
+
+**Export number lookup campaign to CSV**
+
+Exports the details of a phone number lookup campaign to a CSV file.    
+
+### Errors for GET `/numbers/lookup/lookupBulkId/{lookupBulkId}/csv`  
+
+| HTTP code  | Error code  | Type  | Description  |  
+|:------------:|:------------:|:------------:| ------------ |  
+|  400 | 1218  |  invalid_param  |  The lookupBulkId provided is invalid  |  
+|  404 | 1220  |  not_found  |  Lookup Bulk ID not found  |
+
+### Example
+
+```php
+<?php
+
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Use authentication via API Key
+$config = Smscx\Configuration::getDefaultConfiguration()->setApiKey('YOUR_API_KEY');
+
+// OR
+
+// Use authentication via Access Token
+// $config = Smscx\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$smscx = new Smscx\Client\Api\NumbersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$lookup_bulk_id = '68aa4d9f-ee25-4a32-95d0-7272efe3b238'; // string | Identifier of the bulk number lookup campaign
+
+try {
+    $result = $smscx->exportNumberLookupReportToCSV($lookup_bulk_id);
+    print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
+} catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
+    //Lookup campaign ID not found    
+} catch (Smscx\Client\Exception\InvalidRequestException $e) {
+    //Code for Invalid request    
+} catch (Smscx\Client\Exception\ApiException $e) {
+    echo 'Exception when calling NumbersApi->exportNumberLookupReportToCSV: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **lookup_bulk_id** | **string**| Identifier of the bulk number lookup campaign | |
+
+### Return type
+
+**string**
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth), [BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/csv`, `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `exportNumberLookupReportToXLSX()`
+
+```php
+exportNumberLookupReportToXLSX($lookup_bulk_id): \SplFileObject
+```
+
+**Export number lookup campaign to XLSX**
+
+Exports the details of a phone number lookup campaign to a XLSX file.    
+
+### Errors for GET `/numbers/lookup/lookupBulkId/{lookupBulkId}/xlsx`  
+
+| HTTP code  | Error code  | Type  | Description  |  
+|:------------:|:------------:|:------------:| ------------ |  
+|  400 | 1218  |  invalid_param  |  The lookupBulkId provided is invalid  |  
+|  404 | 1220  |  not_found  |  Lookup Bulk ID not found  |
+
+### Example
+
+```php
+<?php
+
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Use authentication via API Key
+$config = Smscx\Configuration::getDefaultConfiguration()->setApiKey('YOUR_API_KEY');
+
+// OR
+
+// Use authentication via Access Token
+// $config = Smscx\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$smscx = new Smscx\Client\Api\NumbersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$lookup_bulk_id = '68aa4d9f-ee25-4a32-95d0-7272efe3b238'; // string | Identifier of the bulk number lookup campaign
+
+try {
+    $result = $smscx->exportNumberLookupReportToXLSX($lookup_bulk_id);
+    print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
+} catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
+    //Lookup campaign ID not found    
+} catch (Smscx\Client\Exception\InvalidRequestException $e) {
+    //Code for Invalid request    
+} catch (Smscx\Client\Exception\ApiException $e) {
+    echo 'Exception when calling NumbersApi->exportNumberLookupReportToXLSX: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **lookup_bulk_id** | **string**| Identifier of the bulk number lookup campaign | |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth), [BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -431,6 +674,8 @@ try {
     // $result->getData()->getCountryIso();
     // $result->getData()->getNetworkOperator();
     // $result->getData()->getTimezone();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
     //Code for Invalid phone number
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -527,6 +772,8 @@ try {
         // $v->getTimezone();
         // $v->getInvalid(); # true or false
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -560,7 +807,7 @@ try {
 ## `getAvailableNumbers()`
 
 ```php
-getAvailableNumbers($country_iso): \Smscx\Client\Model\RentNumbersResponse
+getAvailableNumbers($country_iso, $features, $number_type, $setup_time, $registration, $inbound_sms_sender, $include, $exclude): \Smscx\Client\Model\RentNumbersResponse
 ```
 
 **Get available numbers for rent**
@@ -591,7 +838,17 @@ $smscx = new Smscx\Client\Api\NumbersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$country_iso = FR; // string
+
+$country_iso = 'FR'; // string
+
+# Optional filters
+//$features = 3; // int | Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 = 3 - send and receive SMS)
+//$number_type = 'mobile'; // string | Filter by type of phone number
+//$setup_time = 'instant'; // string | Filter by time of setup
+//$registration = true; // bool | Filter by registration
+//$inbound_sms_sender = true; // bool | Filter numbers that support inbound SMS from alphanumeric sender ID
+//$include = '4559'; // string | Filter phone numbers that include the following digits
+//$exclude = '1554'; // string | Filter phone numbers that exclude the following digits
 
 try {
     $result = $smscx->getAvailableNumbers($country_iso);
@@ -601,14 +858,25 @@ try {
         // $v->getPhoneNumber();
         // $v->getCountryIso();
         // $v->getNetworkOperator();
-        // $v->getSms();
-        // $v->getVoice();
-        // $v->getMinRent();
-        // $v->getMaxRent();
-        // $v->getSetupCost();
-        // $v->getRentalCost();
+        // $v->getFeatures();
+        // $v->getNumberType();
         // $v->getInboundSmsCost();
+        // $v->getOutboundSmsCost();
+        // $v->getSetupCost();
+
+        //foreach ($v->getRentCost() as $key => $value) {
+            //$value->getDays();
+            //$value->getCost();
+        //}
+
+        // $v->getMinRent();
+        // $v->getSetupTime();
+        // $v->getRegistration();
+        // $v->getInboundSmsSender();
+        // $v->getDatetime();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -621,6 +889,14 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **country_iso** | **string**| Two-letter country ISO  (eg. DE, FR, IT) | required |
+| ------------- | ------------- | ------------- | ------------- |
+| **features** | **int**| Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) | [optional] |
+| **number_type** | **string**| Filter by type of phone number | [optional] |
+| **setup_time** | **string**| Filter by time of setup | [optional] |
+| **registration** | **bool**| Filter by registration | [optional] [default to false] |
+| **inbound_sms_sender** | **bool**| Filter numbers that support inbound SMS from alphanumeric sender ID | [optional] [default to false] |
+| **include** | **string**| Filter phone numbers that include the following digits | [optional] |
+| **exclude** | **string**| Filter phone numbers that exclude the following digits | [optional] |
 
 ### Return type
 
@@ -655,12 +931,13 @@ Rent a phone number for a period of time (1, 7 or 30 days).
 |:------------:|:------------:|:------------:| ------------ |  
 |  400 | 1222  |  invalid_param  |  Invalid parameter `numberId` |  
 |  400 | 1224  |  invalid_param  |  Rent period is invalid (1, 7 or 30 days) |  
-|  400 | 1225  |  invalid_param  |  Parameter `autorenew` must be of type boolean |  
+|  400 | 1225  |  invalid_param  |  Parameter `autorenew` must be type boolean |  
 |  400 | 1226  |  invalid_param  |  The parameter `callbackUrl` is not a valid url |  
-|  400 | 1229  |  invalid_param  |  Rent period is not between min and max period allowed for this number |  
+|  400 | 1229  |  invalid_param  |  Rent period is lower than the minimum rent period of this number |  
 |  400 | 1113  |  insufficient_credit  |  Insufficient credit |  
-|  403 | 1231  |  access_denied  |  Cannot rent this phone number (already rented by someone else) |
-|  404 | 1230  |  not_found  |  Number ID not found or number is not available for rent anymore |
+|  400 | 1234  |  invalid_param  |  Registration ID provided is invalid or not found |  
+|  403 | 1231  |  access_denied  |  Cannot rent this phone number (already rented) |  
+|  404 | 1230  |  not_found  |  Number ID not found or number is not available for rent anymore|
 
 ### Example
 
@@ -687,35 +964,35 @@ $rent_number_request = [
     'rentPeriod' => 7,
     'autoRenew' => true,
     'callbackUrl' => 'https://webhook-url/receive-inbound-sms',
-
+    //OPTIONAL, if numbers requires registration, the ID of the registration details
+    //'registrationId' => 'f3e77046-8051-4d8c-ac79-0ef6472995e5',
 ];
 
 try {
     $result = $smscx->rentNumber($rent_number_request);
     print_r($result);
     // $result->getInfo()->getRentId();
-    // $result->getInfo()->getRentCost();
-    // $result->getInfo()->getSetupCost();
-    // $result->getInfo()->getRentPeriod();
-    // $result->getInfo()->getRentStart();
-    // $result->getInfo()->getRentEnd();
+    // $result->getInfo()->getNumberId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
-    // $result->getInfo()->getNetworkOperator();
+    // $result->getInfo()->getRentStart();
+    // $result->getInfo()->getRentEnd();
+    // $result->getInfo()->getRentCost();
+    // $result->getInfo()->getSetupCost();
     // $result->getInfo()->getAutoRenew();
-    // $result->getInfo()->getSms();
-    // $result->getInfo()->getVoice();
-    // $result->getInfo()->getMinRent();
-    // $result->getInfo()->getMaxRent();
-    // $result->getInfo()->getRentalCost();
-    // $result->getInfo()->getInboundSmsCost();
+    // $result->getInfo()->getApproved();
     // $result->getInfo()->getCallbackUrl();
+    // $result->getInfo()->getDatetime();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Number ID not found   
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {
     //Number was already rented by someone else
+} catch (Smscx\Client\Exception\InsufficientBalanceException $e) {
+    //Code for Insufficient balance
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling NumbersApi->rentNumber: ', $e->getMessage(), PHP_EOL;
 }
@@ -757,8 +1034,9 @@ Cancel rent for a phone number. Phone numbers rentals can be canceled within the
 ### Errors for DELETE `/numbers/rent/{rentId}`  
 | HTTP code  | Error code  | Type  | Description  |  
 |:------------:|:------------:|:------------:| ------------ |  
-|  400 | 1221  |  invalid_param  |  Invalid parameter `rentId` |  
+|  400 | 1221  |  invalid_param  |  The rentId provided is invalid |  
 |  403 | 1227  |  access_denied  |  Cannot cancel this rent. More than 30 minutes passed from start of renting period |  
+|  403 | 1232  |  access_denied  |  Cannot cancel this rent. The number has already been used for inbound SMS |  
 |  404 | 1223  |  not_found  |  Rent ID not found |
 
 ### Example
@@ -787,9 +1065,12 @@ try {
     $result = $smscx->cancelRent($rent_id);
     print_r($result);
     // $result->getInfo()->getRentId();
+    // $result->getInfo()->getNumberId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
     // $result->getInfo()->getCreditReturned();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
@@ -835,14 +1116,16 @@ renewRent($rent_id, $renew_rent_request): \Smscx\Client\Model\RentNumberResponse
 Renew the rental of a phone number.      
 
 ### Errors for PATCH `/numbers/rent/{rentId}`  
+
 | HTTP code  | Error code  | Type  | Description  |  
 |:------------:|:------------:|:------------:| ------------ |  
-|  400 | 1221  |  invalid_param  |  Invalid parameter `rentId` |  
+|  400 | 1221  |  invalid_param  |  The rentId provided is invalid |
 |  400 | 1224  |  invalid_param  |  Rent period is invalid (1, 7 or 30 days) |  
-|  400 | 1225  |  invalid_param  |  Parameter `autorenew` must be of type boolean |  
+|  400 | 1225  |  invalid_param  |  Parameter `autorenew` must be type boolean |  
 |  400 | 1226  |  invalid_param  |  The parameter `callbackUrl` is not a valid url |  
-|  400 | 1229  |  invalid_param  |  Rent period is not between min and max period allowed for this number |  
-|  403 | 1228  |  access_denied  |  The rent cannot be renewed (rent already expired or phone number will not be available in the future) |  
+|  400 | 1229  |  invalid_param  |  Rent period is lower than the minimum rent period of this number |  
+|  400 | 1113  | insufficient_credit | Insufficient credit |  
+|  403 | 1228  |  access_denied  |  The rent cannot be renewed (rent already expired or phone number is not available for future rent) |  
 |  404 | 1223  |  not_found  |  Rent ID not found |
 
 ### Example
@@ -866,6 +1149,7 @@ $smscx = new Smscx\Client\Api\NumbersApi(
 );
 
 $rent_id = '471ddea7-930c-49e8-8e99-2683834dd92e';
+
 $renew_rent_request = [
     'rentPeriod' => 7,
     'autoRenew' => false,
@@ -876,28 +1160,25 @@ try {
     $result = $smscx->renewRent($rent_id, $renew_rent_request);
     print_r($result);
     // $result->getInfo()->getRentId();
-    // $result->getInfo()->getRentCost();
-    // $result->getInfo()->getSetupCost();
-    // $result->getInfo()->getRentPeriod();
-    // $result->getInfo()->getRentStart();
-    // $result->getInfo()->getRentEnd();
+    // $result->getInfo()->getNumberId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
-    // $result->getInfo()->getNetworkOperator();
+    // $result->getInfo()->getRentStart();
+    // $result->getInfo()->getRentEnd();  
+    // $result->getInfo()->getRentCost();
     // $result->getInfo()->getAutoRenew();
-    // $result->getInfo()->getSms();
-    // $result->getInfo()->getVoice();
-    // $result->getInfo()->getMinRent();
-    // $result->getInfo()->getMaxRent();
-    // $result->getInfo()->getRentalCost();
-    // $result->getInfo()->getInboundSmsCost();
     // $result->getInfo()->getCallbackUrl();
+    // $result->getInfo()->getDatetime();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Rent ID not found   
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {
     //Number rent cannot be renewed (it won't be available for rent in the future)
+} catch (Smscx\Client\Exception\InsufficientBalanceException $e) {
+    //Code for Insufficient balance    
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling NumbersApi->renewRent: ', $e->getMessage(), PHP_EOL;
 }
@@ -912,7 +1193,7 @@ try {
 
 ### Return type
 
-[**\Smscx\Client\Model\RentNumberResponse**](../Model/RentNumberResponse.md)
+[**\Smscx\Client\Model\RenewNumberResponse**](../Model/RenewNumberResponse.md)
 
 ### Authorization
 
@@ -941,7 +1222,7 @@ Get details of an existing rental.
 ### Errors for GET `/numbers/rent/{rentId}`  
 | HTTP code  | Error code  | Type  | Description  |  
 |:------------:|:------------:|:------------:| ------------ |  
-|  400 | 1221  |  invalid_param  |  Invalid parameter `rentId` |  
+|  400 | 1221  |  invalid_param  |  The rentId provided is invalid |  
 |  404 | 1223  |  not_found  |  Rent ID not found |
 
 ### Example
@@ -970,22 +1251,36 @@ try {
     $result = $smscx->getRentStatus($rent_id);
     print_r($result);
     // $result->getInfo()->getRentId();
+    // $result->getInfo()->getNumberId();
+    // $result->getInfo()->getPhoneNumber();
+    // $result->getInfo()->getCountryIso();
+    // $result->getInfo()->getNetworkOperator();
+    // $result->getInfo()->getFeatures();
+    // $result->getInfo()->getNumberType();
     // $result->getInfo()->getRentCost();
     // $result->getInfo()->getSetupCost();
     // $result->getInfo()->getRentPeriod();
     // $result->getInfo()->getRentStart();
     // $result->getInfo()->getRentEnd();
-    // $result->getInfo()->getPhoneNumber();
-    // $result->getInfo()->getCountryIso();
-    // $result->getInfo()->getNetworkOperator();
-    // $result->getInfo()->getAutoRenew();
-    // $result->getInfo()->getSms();
-    // $result->getInfo()->getVoice();
-    // $result->getInfo()->getMinRent();
-    // $result->getInfo()->getMaxRent();
-    // $result->getInfo()->getRentalCost();
     // $result->getInfo()->getInboundSmsCost();
+    // $result->getInfo()->getOutboundSmsCost();
+    //foreach ($result->getInfo()->getRenewCost() as $key => $value) {
+        //$value->getDays();
+        //$value->getCost();
+    //}
+    // $result->getInfo()->getInboundSms()->getTotal();
+    // $result->getInfo()->getInboundSms()->getCost();
+    // $result->getInfo()->getOutboundSms()->getTotal();
+    // $result->getInfo()->getOutboundSms()->getCost();
+    // $result->getInfo()->getMinRent();
     // $result->getInfo()->getCallbackUrl();    
+    // $result->getInfo()->getAutoRenew();
+    // $result->getInfo()->getInboundSmsSender();
+    // $result->getInfo()->getActiveRent();
+    // $result->getInfo()->getApproved();
+    // $result->getInfo()->getDatetime();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
@@ -1021,7 +1316,7 @@ try {
 ## `getRentedNumbers()`
 
 ```php
-getRentedNumbers(): \Smscx\Client\Model\RentedNumbersResponse
+getRentedNumbers($features, $country_iso, $number_type, $active_rent, $inbound_sms_sender, $include, $exclude): \Smscx\Client\Model\RentedNumbersResponse
 ```
 
 **Get list of your rented numbers**
@@ -1048,27 +1343,49 @@ $smscx = new Smscx\Client\Api\NumbersApi(
     $config
 );
 
+# Optional filters
+//$features = 3; // int | Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 = 3 - send and receive SMS)
+//$country_iso = 'fr'; // string | Filter by country iso. Two-letter country code defined in ISO-3166 alpha 2 standard (case insensitive)
+//$number_type = 'mobile'; // string | Filter by type of phone number
+//$active_rent = true; // bool | Filter by active rent
+//$inbound_sms_sender = true; // bool | Filter numbers that support inbound SMS from alphanumeric sender ID
+//$include = '4559'; // string | Filter phone numbers that include the following digits
+//$exclude = '1554'; // string | Filter phone numbers that exclude the following digits
+
 try {
     $result = $smscx->getRentedNumbers();
     print_r($result);
     foreach ($result->getData() as $k => $v) {
+
         // $v->getRentId();
+        // $v->getNumberId();
+        // $v->getPhoneNumber();
+        // $v->getCountryIso();
+        // $v->getNetworkOperator();
+        // $v->getFeatures();
+        // $v->getNumberType();
         // $v->getRentCost();
         // $v->getSetupCost();
         // $v->getRentPeriod();
         // $v->getRentStart();
         // $v->getRentEnd();
-        // $v->getPhoneNumber();
-        // $v->getCountryIso();
-        // $v->getNetworkOperator();
-        // $v->getAutoRenew();
-        // $v->getSms();
-        // $v->getVoice();
-        // $v->getMinRent();
-        // $v->getMaxRent();
-        // $v->getRentalCost();
         // $v->getInboundSmsCost();
-        // $v->getCallbackUrl();  
+        // $v->getOutboundSmsCost();
+        //foreach ($v->getRenewCost() as $key => $value) {
+            //$value->getDays();
+            //$value->getCost();
+        //}
+        // $v->getInboundSms()->getTotal();
+        // $v->getInboundSms()->getCost();
+        // $v->getOutboundSms()->getTotal();
+        // $v->getOutboundSms()->getCost();
+        // $v->getMinRent();
+        // $v->getCallbackUrl();    
+        // $v->getAutoRenew();
+        // $v->getInboundSmsSender();
+        // $v->getActiveRent();
+        // $v->getApproved();
+        // $v->getDatetime();
     }
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling NumbersApi->getRentedNumbers: ', $e->getMessage(), PHP_EOL;
@@ -1077,7 +1394,15 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **features** | **int**| Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) | [optional] |
+| **country_iso** | **string**| Filter by country iso. Two-letter country code defined in ISO-3166 alpha 2 standard (case insensitive) | [optional] |
+| **number_type** | **string**| Filter by type of phone number | [optional] |
+| **active_rent** | **bool**| Filter by active rent | [optional] [default to false] |
+| **inbound_sms_sender** | **bool**| Filter numbers that support inbound SMS from alphanumeric sender ID | [optional] [default to false] |
+| **include** | **string**| Filter phone numbers that include the following digits | [optional] |
+| **exclude** | **string**| Filter phone numbers that exclude the following digits | [optional] |
 
 ### Return type
 
@@ -1099,7 +1424,7 @@ This endpoint does not need any parameter.
 ## `getInboundSms()`
 
 ```php
-getInboundSms($rent_id): \Smscx\Client\Model\GetInboundSMSResponse
+getInboundSms($rent_id, $limit, $next, $previous): \Smscx\Client\Model\GetInboundSMSResponse
 ```
 
 **Get inbound SMS from rented number**
@@ -1109,7 +1434,7 @@ Get a list of SMS received on the rented phone number.
 ### Errors for GET `/numbers/rent/{rentId}/inbound`  
 | HTTP code  | Error code  | Type  | Description  |  
 |:------------:|:------------:|:------------:| ------------ |  
-|  400 | 1221  |  invalid_param  |  Invalid parameter `rentId` | 
+|  400 | 1221  |  invalid_param  |  The rentId provided is invalid |  
 |  404 | 1223  |  not_found  |  Rent ID not found |
 
 ### Example
@@ -1133,10 +1458,14 @@ $smscx = new Smscx\Client\Api\NumbersApi(
 );
 
 $rent_id = '471ddea7-930c-49e8-8e99-2683834dd92e';
+//$limit = '100'; // int | A limit on the number of objects to be returned
+//$next = 'NTM2NTA'; // string | The next token used to retrieve additional data
+//$previous = 'NTQxNTA'; // string | The previous token used to retrieve additional data
 
 try {
     $result = $smscx->getInboundSms($rent_id);
     print_r($result);
+    // $result->getInfo()->getRentId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
     foreach ($result->getData() as $k => $v) {
@@ -1148,6 +1477,8 @@ try {
         // $v->getCost();
         // $v->getReceivedAt();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
@@ -1162,6 +1493,9 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **rent_id** | **string**| Identifier of the rental operation | required |
+| **limit** | **int**| A limit on the number of objects to be returned | [optional] [default to 500] |
+| **next** | **string**| The next token used to retrieve additional data | [optional] |
+| **previous** | **string**| The previous token used to retrieve additional data | [optional] |
 
 ### Return type
 
@@ -1181,3 +1515,92 @@ try {
 [[Back to README]](../../README.md)
 
 
+
+## `editRentSettings()`
+
+```php
+editRentSettings($rent_id, $edit_rent_request): \Smscx\Client\Model\EditRentResponse
+```
+
+**Edit settings for active rent**
+
+Edit settings of active rent    
+
+### Errors for GET `/numbers/rent/{rentId}/edit`  
+
+| HTTP code  | Error code  | Type  | Description  |  
+|:------------:|:------------:|:------------:| ------------ |  
+|  400 | 1221  |  invalid_param  |  The rentId provided is invalid |  
+|  400 | 1225  |  invalid_param  |  Parameter `autorenew` must be type boolean |  
+|  400 | 1226  |  invalid_param  |  The parameter `callbackUrl` is not a valid url |  
+|  400 | 1233  |  invalid_param  |  At least one parameter required (autoRenew, callbackUrl) |  
+|  404 | 1223  |  not_found  |  Rent ID not found |
+
+### Example
+
+```php
+<?php
+
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Use authentication via API Key
+$config = Smscx\Configuration::getDefaultConfiguration()->setApiKey('YOUR_API_KEY');
+
+// OR
+
+// Use authentication via Access Token
+// $config = Smscx\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$smscx = new Smscx\Client\Api\NumbersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$rent_id = '471ddea7-930c-49e8-8e99-2683834dd92e'; // string | Identifier of the rental operation
+$edit_rent_request = [
+    'autoRenew' => false,
+    'callbackUrl' => 'https://edited-webhook-url/receive-inbound-sms',
+    //If you want to remove the webhook
+    //'callbackUrl' => null
+];
+
+
+try {
+    $result = $smscx->editRentSettings($rent_id, $edit_rent_request);
+    print_r($result);
+    // $result->getInfo()->getRentId();
+    // $result->getInfo()->getDatetime();    
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
+} catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
+    //Lookup campaign ID not found    
+} catch (Smscx\Client\Exception\InvalidRequestException $e) {
+    //Code for Invalid request        
+} catch (Smscx\Client\Exception\ApiException $e) {
+    echo 'Exception when calling NumbersApi->editRentSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **rent_id** | **string**| Identifier of the rental operation | |
+| **edit_rent_request** | [**\Smscx\Client\Model\EditRentRequest**](../Model/EditRentRequest.md)|  | |
+
+### Return type
+
+[**\Smscx\Client\Model\EditRentResponse**](../Model/EditRentResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth), [BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

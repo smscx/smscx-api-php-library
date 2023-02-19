@@ -20,6 +20,8 @@ $campaign_id = '4baf0298-0c21-4df1-a60a-6e3476e95e0b'; // string | Identifier of
 try {
     $result = $smscx->exportCampaignReportToXLSX($campaign_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Campaign ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

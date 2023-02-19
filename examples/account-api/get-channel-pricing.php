@@ -21,6 +21,8 @@ $traffic_type = 'promotional';
 try {
     $result = $smscx->getChannelPricing($channel, $traffic_type);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request
 } catch (Smscx\Client\Exception\NoCoverageException $e) {

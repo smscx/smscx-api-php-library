@@ -24,6 +24,8 @@ $conversation_reply_viber_request = [
 try {
     $result = $smscx->sendConversationReplyViber($conversation_id, $conversation_reply_viber_request);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {

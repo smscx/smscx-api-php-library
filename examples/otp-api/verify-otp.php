@@ -20,6 +20,8 @@ $pin = '2691';
 try {
     $result = $smscx->verifyOtp($otp_id, $pin);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPinException $e) {
     // Code for Invalid PIN
 } catch (Smscx\Client\Exception\OtpAlreadyVerifiedException $e) {

@@ -5,21 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rent_id** | **string** | Unique identifier of the rent operation |
-**rent_cost** | **float** | Cost of renting the phone number for the period chosen |
-**setup_cost** | **float** | One time setup fee for the rented phone number (if applicable) |
-**rent_period** | **int** | Rental period of the phone number (in days) |
-**rent_start** | **\DateTime** | Start date and time of the rental period (UTC) |
-**rent_end** | **\DateTime** | End date and time of the rental period (UTC) |
-**phone_number** | **string** | Phone number that is rented in international E.164 format |
+**number_id** | **string** | Unique identifier of phone number |
+**phone_number** | **string** | Rented phone number in international E.164 format |
 **country_iso** | **string** | Two-letter country code in ISO-3166 alpha 2 standard. Eg. &#x60;DE&#x60;, &#x60;FR&#x60;, &#x60;IT&#x60; |
-**network_operator** | **string** | Network operator of the phone number |
-**auto_renew** | **bool** | Status of the auto renewal setting for this number rental |
-**sms** | **string[]** | SMS features that the phone number supports (inbound or outbound SMS) |
-**voice** | **string[]** | Voice features that the phone number supports |
-**min_rent** | **string** | Minimum period that this phone number must be rented (in days) |
-**max_rent** | **string** | Maximum period that this phone number can be rented (in days) |
-**rental_cost** | [**\Smscx\Client\Model\RentalCost**](RentalCost.md) |  |
-**inbound_sms_cost** | **float** | Cost for receiving a SMS on this phone number (most of the time receiving is free, meaning this is has value 0) |
-**callback_url** | **string** | Callback URL (or webhook) to get the received SMS on the rented phone number |
+**rent_start** | **\DateTime** | Start date and time of the rent period (UTC) |
+**rent_end** | **\DateTime** | End date and time of the rent period (UTC) |
+**rent_cost** | **float** | Cost of renting the phone number |
+**setup_cost** | **float** | The one time setup fee charged at the initial rent of the phone number (if applicable) |
+**auto_renew** | **bool** | Automatically renews the rent for the number with the same period as the current subscription |
+**callback_url** | **string** | Callback URL (or webhook) to get the SMS that is received on the rented phone number (inbound SMS) |
+**approved** | **bool** | If the phone number requires registration, this parameter indicates if the phone number was approved. Value &#x60;true&#x60; means number approved, &#x60;false&#x60; means processing |
+**datetime** | **\DateTime** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

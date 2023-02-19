@@ -45,13 +45,17 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         'phone_number' => 'string',
         'country_iso' => 'string',
         'network_operator' => 'string',
-        'sms' => 'string[]',
-        'voice' => 'string[]',
-        'min_rent' => 'string',
-        'max_rent' => 'string',
+        'features' => 'int',
+        'number_type' => 'string',
+        'inbound_sms_cost' => 'float',
+        'outbound_sms_cost' => 'float',
         'setup_cost' => 'float',
-        'rental_cost' => '\Smscx\Client\Model\RentalCost',
-        'inbound_sms_cost' => 'float'
+        'rent_cost' => '\Smscx\Client\Model\RentCost[]',
+        'min_rent' => 'int',
+        'setup_time' => 'string',
+        'registration' => 'bool',
+        'inbound_sms_sender' => 'bool',
+        'datetime' => '\DateTime'
     ];
 
     /**
@@ -66,13 +70,17 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         'phone_number' => null,
         'country_iso' => null,
         'network_operator' => null,
-        'sms' => null,
-        'voice' => null,
-        'min_rent' => null,
-        'max_rent' => null,
+        'features' => 'int32',
+        'number_type' => null,
+        'inbound_sms_cost' => 'decimal',
+        'outbound_sms_cost' => 'decimal',
         'setup_cost' => 'decimal',
-        'rental_cost' => null,
-        'inbound_sms_cost' => 'decimal'
+        'rent_cost' => null,
+        'min_rent' => 'int32',
+        'setup_time' => null,
+        'registration' => null,
+        'inbound_sms_sender' => null,
+        'datetime' => 'date-time'
     ];
 
     /**
@@ -85,13 +93,17 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
 		'phone_number' => true,
 		'country_iso' => false,
 		'network_operator' => false,
-		'sms' => false,
-		'voice' => false,
-		'min_rent' => true,
-		'max_rent' => true,
+		'features' => false,
+		'number_type' => false,
+		'inbound_sms_cost' => false,
+		'outbound_sms_cost' => true,
 		'setup_cost' => false,
-		'rental_cost' => false,
-		'inbound_sms_cost' => false
+		'rent_cost' => false,
+		'min_rent' => false,
+		'setup_time' => false,
+		'registration' => false,
+		'inbound_sms_sender' => false,
+		'datetime' => false
     ];
 
     /**
@@ -174,13 +186,17 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         'phone_number' => 'phoneNumber',
         'country_iso' => 'countryIso',
         'network_operator' => 'networkOperator',
-        'sms' => 'sms',
-        'voice' => 'voice',
-        'min_rent' => 'minRent',
-        'max_rent' => 'maxRent',
+        'features' => 'features',
+        'number_type' => 'numberType',
+        'inbound_sms_cost' => 'inboundSmsCost',
+        'outbound_sms_cost' => 'outboundSmsCost',
         'setup_cost' => 'setupCost',
-        'rental_cost' => 'rentalCost',
-        'inbound_sms_cost' => 'inboundSmsCost'
+        'rent_cost' => 'rentCost',
+        'min_rent' => 'minRent',
+        'setup_time' => 'setupTime',
+        'registration' => 'registration',
+        'inbound_sms_sender' => 'inboundSmsSender',
+        'datetime' => 'datetime'
     ];
 
     /**
@@ -193,13 +209,17 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         'phone_number' => 'setPhoneNumber',
         'country_iso' => 'setCountryIso',
         'network_operator' => 'setNetworkOperator',
-        'sms' => 'setSms',
-        'voice' => 'setVoice',
-        'min_rent' => 'setMinRent',
-        'max_rent' => 'setMaxRent',
+        'features' => 'setFeatures',
+        'number_type' => 'setNumberType',
+        'inbound_sms_cost' => 'setInboundSmsCost',
+        'outbound_sms_cost' => 'setOutboundSmsCost',
         'setup_cost' => 'setSetupCost',
-        'rental_cost' => 'setRentalCost',
-        'inbound_sms_cost' => 'setInboundSmsCost'
+        'rent_cost' => 'setRentCost',
+        'min_rent' => 'setMinRent',
+        'setup_time' => 'setSetupTime',
+        'registration' => 'setRegistration',
+        'inbound_sms_sender' => 'setInboundSmsSender',
+        'datetime' => 'setDatetime'
     ];
 
     /**
@@ -212,13 +232,17 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         'phone_number' => 'getPhoneNumber',
         'country_iso' => 'getCountryIso',
         'network_operator' => 'getNetworkOperator',
-        'sms' => 'getSms',
-        'voice' => 'getVoice',
-        'min_rent' => 'getMinRent',
-        'max_rent' => 'getMaxRent',
+        'features' => 'getFeatures',
+        'number_type' => 'getNumberType',
+        'inbound_sms_cost' => 'getInboundSmsCost',
+        'outbound_sms_cost' => 'getOutboundSmsCost',
         'setup_cost' => 'getSetupCost',
-        'rental_cost' => 'getRentalCost',
-        'inbound_sms_cost' => 'getInboundSmsCost'
+        'rent_cost' => 'getRentCost',
+        'min_rent' => 'getMinRent',
+        'setup_time' => 'getSetupTime',
+        'registration' => 'getRegistration',
+        'inbound_sms_sender' => 'getInboundSmsSender',
+        'datetime' => 'getDatetime'
     ];
 
     /**
@@ -262,25 +286,24 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         return self::$clientModelName;
     }
 
-    public const SMS_INBOUND = 'inbound';
-    public const SMS_OUTBOUND = 'outbound';
-    public const MIN_RENT__1 = '1';
-    public const MIN_RENT__7 = '7';
-    public const MIN_RENT__30 = '30';
-    public const MAX_RENT__1 = '1';
-    public const MAX_RENT__7 = '7';
-    public const MAX_RENT__30 = '30';
+    public const NUMBER_TYPE_MOBILE = 'mobile';
+    public const NUMBER_TYPE_LANDLINE = 'landline';
+    public const MIN_RENT_1 = 1;
+    public const MIN_RENT_7 = 7;
+    public const MIN_RENT_30 = 30;
+    public const SETUP_TIME_INSTANT = 'instant';
+    public const SETUP_TIME_DELAYED = 'delayed';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getSmsAllowableValues()
+    public function getNumberTypeAllowableValues()
     {
         return [
-            self::SMS_INBOUND,
-            self::SMS_OUTBOUND,
+            self::NUMBER_TYPE_MOBILE,
+            self::NUMBER_TYPE_LANDLINE,
         ];
     }
 
@@ -292,9 +315,9 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
     public function getMinRentAllowableValues()
     {
         return [
-            self::MIN_RENT__1,
-            self::MIN_RENT__7,
-            self::MIN_RENT__30,
+            self::MIN_RENT_1,
+            self::MIN_RENT_7,
+            self::MIN_RENT_30,
         ];
     }
 
@@ -303,12 +326,11 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
      *
      * @return string[]
      */
-    public function getMaxRentAllowableValues()
+    public function getSetupTimeAllowableValues()
     {
         return [
-            self::MAX_RENT__1,
-            self::MAX_RENT__7,
-            self::MAX_RENT__30,
+            self::SETUP_TIME_INSTANT,
+            self::SETUP_TIME_DELAYED,
         ];
     }
 
@@ -331,13 +353,17 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('country_iso', $data ?? [], null);
         $this->setIfExists('network_operator', $data ?? [], null);
-        $this->setIfExists('sms', $data ?? [], null);
-        $this->setIfExists('voice', $data ?? [], null);
-        $this->setIfExists('min_rent', $data ?? [], null);
-        $this->setIfExists('max_rent', $data ?? [], null);
-        $this->setIfExists('setup_cost', $data ?? [], null);
-        $this->setIfExists('rental_cost', $data ?? [], null);
+        $this->setIfExists('features', $data ?? [], null);
+        $this->setIfExists('number_type', $data ?? [], null);
         $this->setIfExists('inbound_sms_cost', $data ?? [], null);
+        $this->setIfExists('outbound_sms_cost', $data ?? [], null);
+        $this->setIfExists('setup_cost', $data ?? [], null);
+        $this->setIfExists('rent_cost', $data ?? [], null);
+        $this->setIfExists('min_rent', $data ?? [], null);
+        $this->setIfExists('setup_time', $data ?? [], null);
+        $this->setIfExists('registration', $data ?? [], null);
+        $this->setIfExists('inbound_sms_sender', $data ?? [], null);
+        $this->setIfExists('datetime', $data ?? [], null);
     }
 
     /**
@@ -399,11 +425,32 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
         if ($this->container['network_operator'] === null) {
             $invalidProperties[] = "'network_operator' can't be null";
         }
-        if ($this->container['sms'] === null) {
-            $invalidProperties[] = "'sms' can't be null";
+        if ($this->container['features'] === null) {
+            $invalidProperties[] = "'features' can't be null";
         }
-        if ($this->container['voice'] === null) {
-            $invalidProperties[] = "'voice' can't be null";
+        if ($this->container['number_type'] === null) {
+            $invalidProperties[] = "'number_type' can't be null";
+        }
+        $allowedValues = $this->getNumberTypeAllowableValues();
+        if (!is_null($this->container['number_type']) && !in_array($this->container['number_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'number_type', must be one of '%s'",
+                $this->container['number_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['inbound_sms_cost'] === null) {
+            $invalidProperties[] = "'inbound_sms_cost' can't be null";
+        }
+        if ($this->container['outbound_sms_cost'] === null) {
+            $invalidProperties[] = "'outbound_sms_cost' can't be null";
+        }
+        if ($this->container['setup_cost'] === null) {
+            $invalidProperties[] = "'setup_cost' can't be null";
+        }
+        if ($this->container['rent_cost'] === null) {
+            $invalidProperties[] = "'rent_cost' can't be null";
         }
         if ($this->container['min_rent'] === null) {
             $invalidProperties[] = "'min_rent' can't be null";
@@ -417,26 +464,23 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
             );
         }
 
-        if ($this->container['max_rent'] === null) {
-            $invalidProperties[] = "'max_rent' can't be null";
+        if ($this->container['setup_time'] === null) {
+            $invalidProperties[] = "'setup_time' can't be null";
         }
-        $allowedValues = $this->getMaxRentAllowableValues();
-        if (!is_null($this->container['max_rent']) && !in_array($this->container['max_rent'], $allowedValues, true)) {
+        $allowedValues = $this->getSetupTimeAllowableValues();
+        if (!is_null($this->container['setup_time']) && !in_array($this->container['setup_time'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'max_rent', must be one of '%s'",
-                $this->container['max_rent'],
+                "invalid value '%s' for 'setup_time', must be one of '%s'",
+                $this->container['setup_time'],
                 implode("', '", $allowedValues)
             );
         }
 
-        if ($this->container['setup_cost'] === null) {
-            $invalidProperties[] = "'setup_cost' can't be null";
+        if ($this->container['registration'] === null) {
+            $invalidProperties[] = "'registration' can't be null";
         }
-        if ($this->container['rental_cost'] === null) {
-            $invalidProperties[] = "'rental_cost' can't be null";
-        }
-        if ($this->container['inbound_sms_cost'] === null) {
-            $invalidProperties[] = "'inbound_sms_cost' can't be null";
+        if ($this->container['datetime'] === null) {
+            $invalidProperties[] = "'datetime' can't be null";
         }
         return $invalidProperties;
     }
@@ -505,7 +549,7 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets phone_number
      *
-     * @param string $phone_number Phone number in international E.164 format. In some cases this value might be null as the phone number will be selected random from a pool of numbers
+     * @param string $phone_number Phone number in international E.164 format. In some cases this value might be `null` as the phone number will be selected random from a pool of numbers
      *
      * @return self
      */
@@ -594,160 +638,134 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
     }
 
     /**
-     * Gets sms
+     * Gets features
      *
-     * @return string[]
+     * @return int
      */
-    public function getSms()
+    public function getFeatures()
     {
-        return $this->container['sms'];
+        return $this->container['features'];
     }
 
     /**
-     * Sets sms
+     * Sets features
      *
-     * @param string[] $sms SMS features that the phone number supports (inbound or outbound SMS)
+     * @param int $features Sum of features of the phone number, in numerical value. The following are the corresponding values for each feature:  - `1` for receiving SMS (inbound SMS)  - `2` for sending SMS (outbound SMS)  - `4` for voice.      <br> <br>  A phone number with feature `1` can only receive SMS, with feature `2` can only send SMS, and with feature value `3` (1 + 2) cand send and receive SMS
      *
      * @return self
      */
-    public function setSms($sms)
+    public function setFeatures($features)
     {
-        $allowedValues = $this->getSmsAllowableValues();
-        if (array_diff($sms, $allowedValues)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'sms', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($features)) {
+            throw new \InvalidArgumentException('non-nullable features cannot be null');
         }
 
-        if (is_null($sms)) {
-            throw new \InvalidArgumentException('non-nullable sms cannot be null');
-        }
-
-        $this->container['sms'] = $sms;
+        $this->container['features'] = $features;
 
         return $this;
     }
 
     /**
-     * Gets voice
-     *
-     * @return string[]
-     */
-    public function getVoice()
-    {
-        return $this->container['voice'];
-    }
-
-    /**
-     * Sets voice
-     *
-     * @param string[] $voice Voice features that the phone number supports
-     *
-     * @return self
-     */
-    public function setVoice($voice)
-    {
-
-        if (is_null($voice)) {
-            throw new \InvalidArgumentException('non-nullable voice cannot be null');
-        }
-
-        $this->container['voice'] = $voice;
-
-        return $this;
-    }
-
-    /**
-     * Gets min_rent
+     * Gets number_type
      *
      * @return string
      */
-    public function getMinRent()
+    public function getNumberType()
     {
-        return $this->container['min_rent'];
+        return $this->container['number_type'];
     }
 
     /**
-     * Sets min_rent
+     * Sets number_type
      *
-     * @param string $min_rent Minimum period that this phone number must be rented (in days)
+     * @param string $number_type Type of phone number
      *
      * @return self
      */
-    public function setMinRent($min_rent)
+    public function setNumberType($number_type)
     {
-        $allowedValues = $this->getMinRentAllowableValues();
-        if (!in_array($min_rent, $allowedValues, true)) {
+        $allowedValues = $this->getNumberTypeAllowableValues();
+        if (!in_array($number_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'min_rent', must be one of '%s'",
-                    $min_rent,
+                    "Invalid value '%s' for 'number_type', must be one of '%s'",
+                    $number_type,
                     implode("', '", $allowedValues)
                 )
             );
         }
 
-        if (is_null($min_rent)) {
-            array_push($this->clientNullablesSetToNull, 'min_rent');
+        if (is_null($number_type)) {
+            throw new \InvalidArgumentException('non-nullable number_type cannot be null');
+        }
+
+        $this->container['number_type'] = $number_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets inbound_sms_cost
+     *
+     * @return float
+     */
+    public function getInboundSmsCost()
+    {
+        return $this->container['inbound_sms_cost'];
+    }
+
+    /**
+     * Sets inbound_sms_cost
+     *
+     * @param float $inbound_sms_cost Cost for receiving a SMS on this phone number (most of the time receiving is free, meaning this has value 0)
+     *
+     * @return self
+     */
+    public function setInboundSmsCost($inbound_sms_cost)
+    {
+
+        if (is_null($inbound_sms_cost)) {
+            throw new \InvalidArgumentException('non-nullable inbound_sms_cost cannot be null');
+        }
+
+        $this->container['inbound_sms_cost'] = $inbound_sms_cost;
+
+        return $this;
+    }
+
+    /**
+     * Gets outbound_sms_cost
+     *
+     * @return float
+     */
+    public function getOutboundSmsCost()
+    {
+        return $this->container['outbound_sms_cost'];
+    }
+
+    /**
+     * Sets outbound_sms_cost
+     *
+     * @param float $outbound_sms_cost Cost for sending a SMS from this phone number. If the number doesn't have outbound SMS as a feature, this parameter will be `null`
+     *
+     * @return self
+     */
+    public function setOutboundSmsCost($outbound_sms_cost)
+    {
+
+        if (is_null($outbound_sms_cost)) {
+            array_push($this->clientNullablesSetToNull, 'outbound_sms_cost');
         } else {
             $nullablesSetToNull = $this->getClientNullablesSetToNull();
-            $index = array_search('min_rent', $nullablesSetToNull);
+            $index = array_search('outbound_sms_cost', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setClientNullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['min_rent'] = $min_rent;
-
-        return $this;
-    }
-
-    /**
-     * Gets max_rent
-     *
-     * @return string
-     */
-    public function getMaxRent()
-    {
-        return $this->container['max_rent'];
-    }
-
-    /**
-     * Sets max_rent
-     *
-     * @param string $max_rent Maximum period that this phone number can be rented (in days)
-     *
-     * @return self
-     */
-    public function setMaxRent($max_rent)
-    {
-        $allowedValues = $this->getMaxRentAllowableValues();
-        if (!in_array($max_rent, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'max_rent', must be one of '%s'",
-                    $max_rent,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($max_rent)) {
-            array_push($this->clientNullablesSetToNull, 'max_rent');
-        } else {
-            $nullablesSetToNull = $this->getClientNullablesSetToNull();
-            $index = array_search('max_rent', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setClientNullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['max_rent'] = $max_rent;
+        $this->container['outbound_sms_cost'] = $outbound_sms_cost;
 
         return $this;
     }
@@ -782,59 +800,195 @@ class DataAvailableNumbersRent implements ModelInterface, ArrayAccess, \JsonSeri
     }
 
     /**
-     * Gets rental_cost
+     * Gets rent_cost
      *
-     * @return \Smscx\Client\Model\RentalCost
+     * @return \Smscx\Client\Model\RentCost[]
      */
-    public function getRentalCost()
+    public function getRentCost()
     {
-        return $this->container['rental_cost'];
+        return $this->container['rent_cost'];
     }
 
     /**
-     * Sets rental_cost
+     * Sets rent_cost
      *
-     * @param \Smscx\Client\Model\RentalCost $rental_cost rental_cost
+     * @param \Smscx\Client\Model\RentCost[] $rent_cost Array of objects with cost for every period (in days). If the phone number has a minimum rent period of 30 days, this array will contain only one object with cost for 30 days. If minimum rent is 1 day, then this array will contain 3 objects with cost for 1, 7, 30 days
      *
      * @return self
      */
-    public function setRentalCost($rental_cost)
+    public function setRentCost($rent_cost)
     {
 
-        if (is_null($rental_cost)) {
-            throw new \InvalidArgumentException('non-nullable rental_cost cannot be null');
+        if (is_null($rent_cost)) {
+            throw new \InvalidArgumentException('non-nullable rent_cost cannot be null');
         }
 
-        $this->container['rental_cost'] = $rental_cost;
+        $this->container['rent_cost'] = $rent_cost;
 
         return $this;
     }
 
     /**
-     * Gets inbound_sms_cost
+     * Gets min_rent
      *
-     * @return float
+     * @return int
      */
-    public function getInboundSmsCost()
+    public function getMinRent()
     {
-        return $this->container['inbound_sms_cost'];
+        return $this->container['min_rent'];
     }
 
     /**
-     * Sets inbound_sms_cost
+     * Sets min_rent
      *
-     * @param float $inbound_sms_cost Cost for receiving a SMS on this phone number (most of the time receiving is free, meaning this is has value 0)
+     * @param int $min_rent Minimum period that this phone number must be rented (in days)
      *
      * @return self
      */
-    public function setInboundSmsCost($inbound_sms_cost)
+    public function setMinRent($min_rent)
     {
-
-        if (is_null($inbound_sms_cost)) {
-            throw new \InvalidArgumentException('non-nullable inbound_sms_cost cannot be null');
+        $allowedValues = $this->getMinRentAllowableValues();
+        if (!in_array($min_rent, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'min_rent', must be one of '%s'",
+                    $min_rent,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
 
-        $this->container['inbound_sms_cost'] = $inbound_sms_cost;
+        if (is_null($min_rent)) {
+            throw new \InvalidArgumentException('non-nullable min_rent cannot be null');
+        }
+
+        $this->container['min_rent'] = $min_rent;
+
+        return $this;
+    }
+
+    /**
+     * Gets setup_time
+     *
+     * @return string
+     */
+    public function getSetupTime()
+    {
+        return $this->container['setup_time'];
+    }
+
+    /**
+     * Sets setup_time
+     *
+     * @param string $setup_time The time to setup the number. instant - the number is available immediately, delayed - the number will be available after a period of time (between 10 minutes and few days)
+     *
+     * @return self
+     */
+    public function setSetupTime($setup_time)
+    {
+        $allowedValues = $this->getSetupTimeAllowableValues();
+        if (!in_array($setup_time, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'setup_time', must be one of '%s'",
+                    $setup_time,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($setup_time)) {
+            throw new \InvalidArgumentException('non-nullable setup_time cannot be null');
+        }
+
+        $this->container['setup_time'] = $setup_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets registration
+     *
+     * @return bool
+     */
+    public function getRegistration()
+    {
+        return $this->container['registration'];
+    }
+
+    /**
+     * Sets registration
+     *
+     * @param bool $registration Indicates if the phone number requires registration
+     *
+     * @return self
+     */
+    public function setRegistration($registration)
+    {
+
+        if (is_null($registration)) {
+            throw new \InvalidArgumentException('non-nullable registration cannot be null');
+        }
+
+        $this->container['registration'] = $registration;
+
+        return $this;
+    }
+
+    /**
+     * Gets inbound_sms_sender
+     *
+     * @return bool|null
+     */
+    public function getInboundSmsSender()
+    {
+        return $this->container['inbound_sms_sender'];
+    }
+
+    /**
+     * Sets inbound_sms_sender
+     *
+     * @param bool|null $inbound_sms_sender Indicates if the phone number can receive SMS from alphanumeric sender ID
+     *
+     * @return self
+     */
+    public function setInboundSmsSender($inbound_sms_sender)
+    {
+
+        if (is_null($inbound_sms_sender)) {
+            throw new \InvalidArgumentException('non-nullable inbound_sms_sender cannot be null');
+        }
+
+        $this->container['inbound_sms_sender'] = $inbound_sms_sender;
+
+        return $this;
+    }
+
+    /**
+     * Gets datetime
+     *
+     * @return \DateTime
+     */
+    public function getDatetime()
+    {
+        return $this->container['datetime'];
+    }
+
+    /**
+     * Sets datetime
+     *
+     * @param \DateTime $datetime datetime
+     *
+     * @return self
+     */
+    public function setDatetime($datetime)
+    {
+
+        if (is_null($datetime)) {
+            throw new \InvalidArgumentException('non-nullable datetime cannot be null');
+        }
+
+        $this->container['datetime'] = $datetime;
 
         return $this;
     }

@@ -51,6 +51,8 @@ $conversation_id = 'c38fa60d-ce8f-4918-8b9d-d991bc44cb73';
 try {
     $result = $smscx->getConversation($conversation_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Conversation ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -180,6 +182,8 @@ $conversation_id = 'c38fa60d-ce8f-4918-8b9d-d991bc44cb73';
 try {
     $result = $smscx->markConversationAsRead($conversation_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Conversation ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -258,6 +262,8 @@ $conversation_reply_sms_request = [
 try {
     $result = $smscx->sendConversationReplySms($conversation_id, $conversation_reply_sms_request);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Conversation ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -342,6 +348,8 @@ $conversation_reply_viber_request = [
 try {
     $result = $smscx->sendConversationReplyViber($conversation_id, $conversation_reply_viber_request);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
@@ -430,6 +438,8 @@ $conversation_reply_whatsapp_request = [
 try {
     $result = $smscx->sendConversationReplyWhatsapp($conversation_id, $conversation_reply_whatsapp_request);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {

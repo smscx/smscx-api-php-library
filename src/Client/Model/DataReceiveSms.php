@@ -359,7 +359,7 @@ class DataReceiveSms implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets msg_id
      *
-     * @param string $msg_id Identifier of the receive message
+     * @param string $msg_id Identifier of the received message
      *
      * @return self
      */

@@ -36,6 +36,8 @@ try {
         // $v->getCampaignName();
         // $v->getDatetime();
     }    
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling OptoutsApi->getOptoutsList: ', $e->getMessage(), PHP_EOL;
 }

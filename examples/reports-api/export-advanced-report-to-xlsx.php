@@ -27,6 +27,8 @@ $limit = 100; // int | A limit on the number of objects to be returned
 try {
     $result = $smscx->exportAdvancedReportToXLSX($period, $start_date, $end_date, $channel, $source, $delivery_report, $country_iso, $limit);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling ReportsApi->exportAdvancedReportToXLSX: ', $e->getMessage(), PHP_EOL;
 }

@@ -42,22 +42,17 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $clientTypes = [
         'rent_id' => 'string',
-        'rent_cost' => 'float',
-        'setup_cost' => 'float',
-        'rent_period' => 'int',
-        'rent_start' => '\DateTime',
-        'rent_end' => '\DateTime',
+        'number_id' => 'string',
         'phone_number' => 'string',
         'country_iso' => 'string',
-        'network_operator' => 'string',
+        'rent_start' => '\DateTime',
+        'rent_end' => '\DateTime',
+        'rent_cost' => 'float',
+        'setup_cost' => 'float',
         'auto_renew' => 'bool',
-        'sms' => 'string[]',
-        'voice' => 'string[]',
-        'min_rent' => 'string',
-        'max_rent' => 'string',
-        'rental_cost' => '\Smscx\Client\Model\RentalCost',
-        'inbound_sms_cost' => 'float',
-        'callback_url' => 'string'
+        'callback_url' => 'string',
+        'approved' => 'bool',
+        'datetime' => '\DateTime'
     ];
 
     /**
@@ -69,22 +64,17 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $clientFormats = [
         'rent_id' => 'uuid',
-        'rent_cost' => null,
-        'setup_cost' => null,
-        'rent_period' => 'int32',
-        'rent_start' => 'date-time',
-        'rent_end' => 'date-time',
+        'number_id' => 'uuid',
         'phone_number' => null,
         'country_iso' => null,
-        'network_operator' => null,
+        'rent_start' => 'date-time',
+        'rent_end' => 'date-time',
+        'rent_cost' => 'decimal',
+        'setup_cost' => 'decimal',
         'auto_renew' => null,
-        'sms' => null,
-        'voice' => null,
-        'min_rent' => null,
-        'max_rent' => null,
-        'rental_cost' => null,
-        'inbound_sms_cost' => 'decimal',
-        'callback_url' => 'url'
+        'callback_url' => 'url',
+        'approved' => null,
+        'datetime' => 'date-time'
     ];
 
     /**
@@ -94,22 +84,17 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $clientNullables = [
         'rent_id' => false,
-		'rent_cost' => false,
-		'setup_cost' => false,
-		'rent_period' => false,
-		'rent_start' => false,
-		'rent_end' => false,
+		'number_id' => false,
 		'phone_number' => false,
 		'country_iso' => false,
-		'network_operator' => false,
+		'rent_start' => false,
+		'rent_end' => false,
+		'rent_cost' => false,
+		'setup_cost' => false,
 		'auto_renew' => false,
-		'sms' => false,
-		'voice' => false,
-		'min_rent' => true,
-		'max_rent' => true,
-		'rental_cost' => false,
-		'inbound_sms_cost' => false,
-		'callback_url' => true
+		'callback_url' => true,
+		'approved' => false,
+		'datetime' => false
     ];
 
     /**
@@ -189,22 +174,17 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'rent_id' => 'rentId',
-        'rent_cost' => 'rentCost',
-        'setup_cost' => 'setupCost',
-        'rent_period' => 'rentPeriod',
-        'rent_start' => 'rentStart',
-        'rent_end' => 'rentEnd',
+        'number_id' => 'numberId',
         'phone_number' => 'phoneNumber',
         'country_iso' => 'countryIso',
-        'network_operator' => 'networkOperator',
+        'rent_start' => 'rentStart',
+        'rent_end' => 'rentEnd',
+        'rent_cost' => 'rentCost',
+        'setup_cost' => 'setupCost',
         'auto_renew' => 'autoRenew',
-        'sms' => 'sms',
-        'voice' => 'voice',
-        'min_rent' => 'minRent',
-        'max_rent' => 'maxRent',
-        'rental_cost' => 'rentalCost',
-        'inbound_sms_cost' => 'inboundSmsCost',
-        'callback_url' => 'callbackUrl'
+        'callback_url' => 'callbackUrl',
+        'approved' => 'approved',
+        'datetime' => 'datetime'
     ];
 
     /**
@@ -214,22 +194,17 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'rent_id' => 'setRentId',
-        'rent_cost' => 'setRentCost',
-        'setup_cost' => 'setSetupCost',
-        'rent_period' => 'setRentPeriod',
-        'rent_start' => 'setRentStart',
-        'rent_end' => 'setRentEnd',
+        'number_id' => 'setNumberId',
         'phone_number' => 'setPhoneNumber',
         'country_iso' => 'setCountryIso',
-        'network_operator' => 'setNetworkOperator',
+        'rent_start' => 'setRentStart',
+        'rent_end' => 'setRentEnd',
+        'rent_cost' => 'setRentCost',
+        'setup_cost' => 'setSetupCost',
         'auto_renew' => 'setAutoRenew',
-        'sms' => 'setSms',
-        'voice' => 'setVoice',
-        'min_rent' => 'setMinRent',
-        'max_rent' => 'setMaxRent',
-        'rental_cost' => 'setRentalCost',
-        'inbound_sms_cost' => 'setInboundSmsCost',
-        'callback_url' => 'setCallbackUrl'
+        'callback_url' => 'setCallbackUrl',
+        'approved' => 'setApproved',
+        'datetime' => 'setDatetime'
     ];
 
     /**
@@ -239,22 +214,17 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'rent_id' => 'getRentId',
-        'rent_cost' => 'getRentCost',
-        'setup_cost' => 'getSetupCost',
-        'rent_period' => 'getRentPeriod',
-        'rent_start' => 'getRentStart',
-        'rent_end' => 'getRentEnd',
+        'number_id' => 'getNumberId',
         'phone_number' => 'getPhoneNumber',
         'country_iso' => 'getCountryIso',
-        'network_operator' => 'getNetworkOperator',
+        'rent_start' => 'getRentStart',
+        'rent_end' => 'getRentEnd',
+        'rent_cost' => 'getRentCost',
+        'setup_cost' => 'getSetupCost',
         'auto_renew' => 'getAutoRenew',
-        'sms' => 'getSms',
-        'voice' => 'getVoice',
-        'min_rent' => 'getMinRent',
-        'max_rent' => 'getMaxRent',
-        'rental_cost' => 'getRentalCost',
-        'inbound_sms_cost' => 'getInboundSmsCost',
-        'callback_url' => 'getCallbackUrl'
+        'callback_url' => 'getCallbackUrl',
+        'approved' => 'getApproved',
+        'datetime' => 'getDatetime'
     ];
 
     /**
@@ -298,72 +268,6 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$clientModelName;
     }
 
-    public const RENT_PERIOD_1 = 1;
-    public const RENT_PERIOD_7 = 7;
-    public const RENT_PERIOD_30 = 30;
-    public const SMS_INBOUND = 'inbound';
-    public const SMS_OUTBOUND = 'outbound';
-    public const MIN_RENT__1 = '1';
-    public const MIN_RENT__7 = '7';
-    public const MIN_RENT__30 = '30';
-    public const MAX_RENT__1 = '1';
-    public const MAX_RENT__7 = '7';
-    public const MAX_RENT__30 = '30';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getRentPeriodAllowableValues()
-    {
-        return [
-            self::RENT_PERIOD_1,
-            self::RENT_PERIOD_7,
-            self::RENT_PERIOD_30,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSmsAllowableValues()
-    {
-        return [
-            self::SMS_INBOUND,
-            self::SMS_OUTBOUND,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMinRentAllowableValues()
-    {
-        return [
-            self::MIN_RENT__1,
-            self::MIN_RENT__7,
-            self::MIN_RENT__30,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMaxRentAllowableValues()
-    {
-        return [
-            self::MAX_RENT__1,
-            self::MAX_RENT__7,
-            self::MAX_RENT__30,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -381,22 +285,17 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('rent_id', $data ?? [], null);
-        $this->setIfExists('rent_cost', $data ?? [], null);
-        $this->setIfExists('setup_cost', $data ?? [], null);
-        $this->setIfExists('rent_period', $data ?? [], null);
-        $this->setIfExists('rent_start', $data ?? [], null);
-        $this->setIfExists('rent_end', $data ?? [], null);
+        $this->setIfExists('number_id', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('country_iso', $data ?? [], null);
-        $this->setIfExists('network_operator', $data ?? [], null);
+        $this->setIfExists('rent_start', $data ?? [], null);
+        $this->setIfExists('rent_end', $data ?? [], null);
+        $this->setIfExists('rent_cost', $data ?? [], null);
+        $this->setIfExists('setup_cost', $data ?? [], null);
         $this->setIfExists('auto_renew', $data ?? [], null);
-        $this->setIfExists('sms', $data ?? [], null);
-        $this->setIfExists('voice', $data ?? [], null);
-        $this->setIfExists('min_rent', $data ?? [], null);
-        $this->setIfExists('max_rent', $data ?? [], null);
-        $this->setIfExists('rental_cost', $data ?? [], null);
-        $this->setIfExists('inbound_sms_cost', $data ?? [], null);
         $this->setIfExists('callback_url', $data ?? [], null);
+        $this->setIfExists('approved', $data ?? [], null);
+        $this->setIfExists('datetime', $data ?? [], null);
     }
 
     /**
@@ -441,30 +340,21 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = "invalid value for 'rent_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
         }
 
-        if ($this->container['rent_cost'] === null) {
-            $invalidProperties[] = "'rent_cost' can't be null";
+        if ($this->container['number_id'] === null) {
+            $invalidProperties[] = "'number_id' can't be null";
         }
-        if ($this->container['setup_cost'] === null) {
-            $invalidProperties[] = "'setup_cost' can't be null";
-        }
-        if ($this->container['rent_period'] === null) {
-            $invalidProperties[] = "'rent_period' can't be null";
-        }
-        $allowedValues = $this->getRentPeriodAllowableValues();
-        if (!is_null($this->container['rent_period']) && !in_array($this->container['rent_period'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'rent_period', must be one of '%s'",
-                $this->container['rent_period'],
-                implode("', '", $allowedValues)
-            );
+        if ((mb_strlen($this->container['number_id']) > 36)) {
+            $invalidProperties[] = "invalid value for 'number_id', the character length must be smaller than or equal to 36.";
         }
 
-        if ($this->container['rent_start'] === null) {
-            $invalidProperties[] = "'rent_start' can't be null";
+        if ((mb_strlen($this->container['number_id']) < 36)) {
+            $invalidProperties[] = "invalid value for 'number_id', the character length must be bigger than or equal to 36.";
         }
-        if ($this->container['rent_end'] === null) {
-            $invalidProperties[] = "'rent_end' can't be null";
+
+        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['number_id'])) {
+            $invalidProperties[] = "invalid value for 'number_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
         }
+
         if ($this->container['phone_number'] === null) {
             $invalidProperties[] = "'phone_number' can't be null";
         }
@@ -479,50 +369,29 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = "invalid value for 'country_iso', the character length must be bigger than or equal to 2.";
         }
 
-        if ($this->container['network_operator'] === null) {
-            $invalidProperties[] = "'network_operator' can't be null";
+        if ($this->container['rent_start'] === null) {
+            $invalidProperties[] = "'rent_start' can't be null";
+        }
+        if ($this->container['rent_end'] === null) {
+            $invalidProperties[] = "'rent_end' can't be null";
+        }
+        if ($this->container['rent_cost'] === null) {
+            $invalidProperties[] = "'rent_cost' can't be null";
+        }
+        if ($this->container['setup_cost'] === null) {
+            $invalidProperties[] = "'setup_cost' can't be null";
         }
         if ($this->container['auto_renew'] === null) {
             $invalidProperties[] = "'auto_renew' can't be null";
         }
-        if ($this->container['sms'] === null) {
-            $invalidProperties[] = "'sms' can't be null";
-        }
-        if ($this->container['voice'] === null) {
-            $invalidProperties[] = "'voice' can't be null";
-        }
-        if ($this->container['min_rent'] === null) {
-            $invalidProperties[] = "'min_rent' can't be null";
-        }
-        $allowedValues = $this->getMinRentAllowableValues();
-        if (!is_null($this->container['min_rent']) && !in_array($this->container['min_rent'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'min_rent', must be one of '%s'",
-                $this->container['min_rent'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['max_rent'] === null) {
-            $invalidProperties[] = "'max_rent' can't be null";
-        }
-        $allowedValues = $this->getMaxRentAllowableValues();
-        if (!is_null($this->container['max_rent']) && !in_array($this->container['max_rent'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'max_rent', must be one of '%s'",
-                $this->container['max_rent'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['rental_cost'] === null) {
-            $invalidProperties[] = "'rental_cost' can't be null";
-        }
-        if ($this->container['inbound_sms_cost'] === null) {
-            $invalidProperties[] = "'inbound_sms_cost' can't be null";
-        }
         if ($this->container['callback_url'] === null) {
             $invalidProperties[] = "'callback_url' can't be null";
+        }
+        if ($this->container['approved'] === null) {
+            $invalidProperties[] = "'approved' can't be null";
+        }
+        if ($this->container['datetime'] === null) {
+            $invalidProperties[] = "'datetime' can't be null";
         }
         return $invalidProperties;
     }
@@ -579,156 +448,40 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets rent_cost
+     * Gets number_id
      *
-     * @return float
+     * @return string
      */
-    public function getRentCost()
+    public function getNumberId()
     {
-        return $this->container['rent_cost'];
+        return $this->container['number_id'];
     }
 
     /**
-     * Sets rent_cost
+     * Sets number_id
      *
-     * @param float $rent_cost Cost of renting the phone number for the period chosen
+     * @param string $number_id Unique identifier of phone number
      *
      * @return self
      */
-    public function setRentCost($rent_cost)
+    public function setNumberId($number_id)
     {
-
-        if (is_null($rent_cost)) {
-            throw new \InvalidArgumentException('non-nullable rent_cost cannot be null');
+        if ((mb_strlen($number_id) > 36)) {
+            throw new \InvalidArgumentException('invalid length for $number_id when calling InfoRentNumber., must be smaller than or equal to 36.');
+        }
+        if ((mb_strlen($number_id) < 36)) {
+            throw new \InvalidArgumentException('invalid length for $number_id when calling InfoRentNumber., must be bigger than or equal to 36.');
+        }
+        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $number_id))) {
+            throw new \InvalidArgumentException("invalid value for \$number_id when calling InfoRentNumber., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
         }
 
-        $this->container['rent_cost'] = $rent_cost;
 
-        return $this;
-    }
-
-    /**
-     * Gets setup_cost
-     *
-     * @return float
-     */
-    public function getSetupCost()
-    {
-        return $this->container['setup_cost'];
-    }
-
-    /**
-     * Sets setup_cost
-     *
-     * @param float $setup_cost One time setup fee for the rented phone number (if applicable)
-     *
-     * @return self
-     */
-    public function setSetupCost($setup_cost)
-    {
-
-        if (is_null($setup_cost)) {
-            throw new \InvalidArgumentException('non-nullable setup_cost cannot be null');
+        if (is_null($number_id)) {
+            throw new \InvalidArgumentException('non-nullable number_id cannot be null');
         }
 
-        $this->container['setup_cost'] = $setup_cost;
-
-        return $this;
-    }
-
-    /**
-     * Gets rent_period
-     *
-     * @return int
-     */
-    public function getRentPeriod()
-    {
-        return $this->container['rent_period'];
-    }
-
-    /**
-     * Sets rent_period
-     *
-     * @param int $rent_period Rental period of the phone number (in days)
-     *
-     * @return self
-     */
-    public function setRentPeriod($rent_period)
-    {
-        $allowedValues = $this->getRentPeriodAllowableValues();
-        if (!in_array($rent_period, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'rent_period', must be one of '%s'",
-                    $rent_period,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($rent_period)) {
-            throw new \InvalidArgumentException('non-nullable rent_period cannot be null');
-        }
-
-        $this->container['rent_period'] = $rent_period;
-
-        return $this;
-    }
-
-    /**
-     * Gets rent_start
-     *
-     * @return \DateTime
-     */
-    public function getRentStart()
-    {
-        return $this->container['rent_start'];
-    }
-
-    /**
-     * Sets rent_start
-     *
-     * @param \DateTime $rent_start Start date and time of the rental period (UTC)
-     *
-     * @return self
-     */
-    public function setRentStart($rent_start)
-    {
-
-        if (is_null($rent_start)) {
-            throw new \InvalidArgumentException('non-nullable rent_start cannot be null');
-        }
-
-        $this->container['rent_start'] = $rent_start;
-
-        return $this;
-    }
-
-    /**
-     * Gets rent_end
-     *
-     * @return \DateTime
-     */
-    public function getRentEnd()
-    {
-        return $this->container['rent_end'];
-    }
-
-    /**
-     * Sets rent_end
-     *
-     * @param \DateTime $rent_end End date and time of the rental period (UTC)
-     *
-     * @return self
-     */
-    public function setRentEnd($rent_end)
-    {
-
-        if (is_null($rent_end)) {
-            throw new \InvalidArgumentException('non-nullable rent_end cannot be null');
-        }
-
-        $this->container['rent_end'] = $rent_end;
+        $this->container['number_id'] = $number_id;
 
         return $this;
     }
@@ -746,7 +499,7 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets phone_number
      *
-     * @param string $phone_number Phone number that is rented in international E.164 format
+     * @param string $phone_number Rented phone number in international E.164 format
      *
      * @return self
      */
@@ -799,30 +552,117 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets network_operator
+     * Gets rent_start
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getNetworkOperator()
+    public function getRentStart()
     {
-        return $this->container['network_operator'];
+        return $this->container['rent_start'];
     }
 
     /**
-     * Sets network_operator
+     * Sets rent_start
      *
-     * @param string $network_operator Network operator of the phone number
+     * @param \DateTime $rent_start Start date and time of the rent period (UTC)
      *
      * @return self
      */
-    public function setNetworkOperator($network_operator)
+    public function setRentStart($rent_start)
     {
 
-        if (is_null($network_operator)) {
-            throw new \InvalidArgumentException('non-nullable network_operator cannot be null');
+        if (is_null($rent_start)) {
+            throw new \InvalidArgumentException('non-nullable rent_start cannot be null');
         }
 
-        $this->container['network_operator'] = $network_operator;
+        $this->container['rent_start'] = $rent_start;
+
+        return $this;
+    }
+
+    /**
+     * Gets rent_end
+     *
+     * @return \DateTime
+     */
+    public function getRentEnd()
+    {
+        return $this->container['rent_end'];
+    }
+
+    /**
+     * Sets rent_end
+     *
+     * @param \DateTime $rent_end End date and time of the rent period (UTC)
+     *
+     * @return self
+     */
+    public function setRentEnd($rent_end)
+    {
+
+        if (is_null($rent_end)) {
+            throw new \InvalidArgumentException('non-nullable rent_end cannot be null');
+        }
+
+        $this->container['rent_end'] = $rent_end;
+
+        return $this;
+    }
+
+    /**
+     * Gets rent_cost
+     *
+     * @return float
+     */
+    public function getRentCost()
+    {
+        return $this->container['rent_cost'];
+    }
+
+    /**
+     * Sets rent_cost
+     *
+     * @param float $rent_cost Cost of renting the phone number
+     *
+     * @return self
+     */
+    public function setRentCost($rent_cost)
+    {
+
+        if (is_null($rent_cost)) {
+            throw new \InvalidArgumentException('non-nullable rent_cost cannot be null');
+        }
+
+        $this->container['rent_cost'] = $rent_cost;
+
+        return $this;
+    }
+
+    /**
+     * Gets setup_cost
+     *
+     * @return float
+     */
+    public function getSetupCost()
+    {
+        return $this->container['setup_cost'];
+    }
+
+    /**
+     * Sets setup_cost
+     *
+     * @param float $setup_cost The one time setup fee charged at the initial rent of the phone number (if applicable)
+     *
+     * @return self
+     */
+    public function setSetupCost($setup_cost)
+    {
+
+        if (is_null($setup_cost)) {
+            throw new \InvalidArgumentException('non-nullable setup_cost cannot be null');
+        }
+
+        $this->container['setup_cost'] = $setup_cost;
 
         return $this;
     }
@@ -840,7 +680,7 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets auto_renew
      *
-     * @param bool $auto_renew Status of the auto renewal setting for this number rental
+     * @param bool $auto_renew Automatically renews the rent for the number with the same period as the current subscription
      *
      * @return self
      */
@@ -852,223 +692,6 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['auto_renew'] = $auto_renew;
-
-        return $this;
-    }
-
-    /**
-     * Gets sms
-     *
-     * @return string[]
-     */
-    public function getSms()
-    {
-        return $this->container['sms'];
-    }
-
-    /**
-     * Sets sms
-     *
-     * @param string[] $sms SMS features that the phone number supports (inbound or outbound SMS)
-     *
-     * @return self
-     */
-    public function setSms($sms)
-    {
-        $allowedValues = $this->getSmsAllowableValues();
-        if (array_diff($sms, $allowedValues)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'sms', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($sms)) {
-            throw new \InvalidArgumentException('non-nullable sms cannot be null');
-        }
-
-        $this->container['sms'] = $sms;
-
-        return $this;
-    }
-
-    /**
-     * Gets voice
-     *
-     * @return string[]
-     */
-    public function getVoice()
-    {
-        return $this->container['voice'];
-    }
-
-    /**
-     * Sets voice
-     *
-     * @param string[] $voice Voice features that the phone number supports
-     *
-     * @return self
-     */
-    public function setVoice($voice)
-    {
-
-        if (is_null($voice)) {
-            throw new \InvalidArgumentException('non-nullable voice cannot be null');
-        }
-
-        $this->container['voice'] = $voice;
-
-        return $this;
-    }
-
-    /**
-     * Gets min_rent
-     *
-     * @return string
-     */
-    public function getMinRent()
-    {
-        return $this->container['min_rent'];
-    }
-
-    /**
-     * Sets min_rent
-     *
-     * @param string $min_rent Minimum period that this phone number must be rented (in days)
-     *
-     * @return self
-     */
-    public function setMinRent($min_rent)
-    {
-        $allowedValues = $this->getMinRentAllowableValues();
-        if (!in_array($min_rent, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'min_rent', must be one of '%s'",
-                    $min_rent,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($min_rent)) {
-            array_push($this->clientNullablesSetToNull, 'min_rent');
-        } else {
-            $nullablesSetToNull = $this->getClientNullablesSetToNull();
-            $index = array_search('min_rent', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setClientNullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['min_rent'] = $min_rent;
-
-        return $this;
-    }
-
-    /**
-     * Gets max_rent
-     *
-     * @return string
-     */
-    public function getMaxRent()
-    {
-        return $this->container['max_rent'];
-    }
-
-    /**
-     * Sets max_rent
-     *
-     * @param string $max_rent Maximum period that this phone number can be rented (in days)
-     *
-     * @return self
-     */
-    public function setMaxRent($max_rent)
-    {
-        $allowedValues = $this->getMaxRentAllowableValues();
-        if (!in_array($max_rent, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'max_rent', must be one of '%s'",
-                    $max_rent,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($max_rent)) {
-            array_push($this->clientNullablesSetToNull, 'max_rent');
-        } else {
-            $nullablesSetToNull = $this->getClientNullablesSetToNull();
-            $index = array_search('max_rent', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setClientNullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['max_rent'] = $max_rent;
-
-        return $this;
-    }
-
-    /**
-     * Gets rental_cost
-     *
-     * @return \Smscx\Client\Model\RentalCost
-     */
-    public function getRentalCost()
-    {
-        return $this->container['rental_cost'];
-    }
-
-    /**
-     * Sets rental_cost
-     *
-     * @param \Smscx\Client\Model\RentalCost $rental_cost rental_cost
-     *
-     * @return self
-     */
-    public function setRentalCost($rental_cost)
-    {
-
-        if (is_null($rental_cost)) {
-            throw new \InvalidArgumentException('non-nullable rental_cost cannot be null');
-        }
-
-        $this->container['rental_cost'] = $rental_cost;
-
-        return $this;
-    }
-
-    /**
-     * Gets inbound_sms_cost
-     *
-     * @return float
-     */
-    public function getInboundSmsCost()
-    {
-        return $this->container['inbound_sms_cost'];
-    }
-
-    /**
-     * Sets inbound_sms_cost
-     *
-     * @param float $inbound_sms_cost Cost for receiving a SMS on this phone number (most of the time receiving is free, meaning this is has value 0)
-     *
-     * @return self
-     */
-    public function setInboundSmsCost($inbound_sms_cost)
-    {
-
-        if (is_null($inbound_sms_cost)) {
-            throw new \InvalidArgumentException('non-nullable inbound_sms_cost cannot be null');
-        }
-
-        $this->container['inbound_sms_cost'] = $inbound_sms_cost;
 
         return $this;
     }
@@ -1086,7 +709,7 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets callback_url
      *
-     * @param string $callback_url Callback URL (or webhook) to get the received SMS on the rented phone number
+     * @param string $callback_url Callback URL (or webhook) to get the SMS that is received on the rented phone number (inbound SMS)
      *
      * @return self
      */
@@ -1105,6 +728,64 @@ class InfoRentNumber implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['callback_url'] = $callback_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets approved
+     *
+     * @return bool
+     */
+    public function getApproved()
+    {
+        return $this->container['approved'];
+    }
+
+    /**
+     * Sets approved
+     *
+     * @param bool $approved If the phone number requires registration, this parameter indicates if the phone number was approved. Value `true` means number approved, `false` means processing
+     *
+     * @return self
+     */
+    public function setApproved($approved)
+    {
+
+        if (is_null($approved)) {
+            throw new \InvalidArgumentException('non-nullable approved cannot be null');
+        }
+
+        $this->container['approved'] = $approved;
+
+        return $this;
+    }
+
+    /**
+     * Gets datetime
+     *
+     * @return \DateTime
+     */
+    public function getDatetime()
+    {
+        return $this->container['datetime'];
+    }
+
+    /**
+     * Sets datetime
+     *
+     * @param \DateTime $datetime datetime
+     *
+     * @return self
+     */
+    public function setDatetime($datetime)
+    {
+
+        if (is_null($datetime)) {
+            throw new \InvalidArgumentException('non-nullable datetime cannot be null');
+        }
+
+        $this->container['datetime'] = $datetime;
 
         return $this;
     }

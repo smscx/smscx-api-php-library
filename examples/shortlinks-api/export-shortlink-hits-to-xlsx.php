@@ -19,6 +19,8 @@ $short_id = 'KgTX';
 try {
     $result = $smscx->exportShortlinkHitsToXLSX($short_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Shortlink ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

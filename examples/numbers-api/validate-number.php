@@ -24,6 +24,8 @@ try {
     // $result->getData()->getCountryIso();
     // $result->getData()->getNetworkOperator();
     // $result->getData()->getTimezone();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
     //Code for Invalid phone number
 } catch (Smscx\Client\Exception\ApiException $e) {

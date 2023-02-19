@@ -63,6 +63,8 @@ try {
     // $result->getInfo()->getTotalPhoneNumbers();
     // $result->getInfo()->getPhoneNumbersByCountry();
     // $result->getInfo()->getInvalid();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
@@ -142,6 +144,8 @@ try {
     print_r($result);
     // $result->getInfo()->getId();
     // $result->getInfo()->getPhoneNumber();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Optout ID not found    
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {
@@ -351,6 +355,8 @@ try {
         // $v->getCampaignName();
         // $v->getDatetime();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling OptoutsApi->getOptoutsList: ', $e->getMessage(), PHP_EOL;
 }

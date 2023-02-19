@@ -37,6 +37,8 @@ try {
     // $result->getData()->getPortedNetwork();
     // $result->getData()->getRoamingNetwork();
     // $result->getData()->getDatetime();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
     //Code for Invalid phone number
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

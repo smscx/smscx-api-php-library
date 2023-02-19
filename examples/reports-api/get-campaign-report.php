@@ -48,6 +48,8 @@ try {
         // $v->getText();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Campaign ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

@@ -69,6 +69,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\TemplateNotApprovedException $e) {

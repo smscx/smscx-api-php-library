@@ -21,6 +21,8 @@ try {
     $result = $smscx->cancelOtp($otp_id);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //OTP ID not found    
 } catch (Smscx\Client\Exception\OtpActionNotAllowedException $e) {

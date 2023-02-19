@@ -15,6 +15,7 @@ $smscx = new Smscx\Client\Api\ShortlinksApi(
     $config
 );
 $short_id = 'KgTX';
+
 $shortlink_update_request = [
     'name' => 'My new name',
     'url' => 'https://my-new-long-url-that-will-replace-existing-long-url/',
@@ -24,6 +25,8 @@ try {
     $result = $smscx->updateShortlink($short_id, $shortlink_update_request);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Shortlink ID not found    
 } catch (Smscx\Client\Exception\DuplicateValueException $e) {

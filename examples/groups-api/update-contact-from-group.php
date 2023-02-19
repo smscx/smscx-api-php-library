@@ -28,6 +28,8 @@ try {
     print_r($result);
     // $result->getInfo()->getId();
     // $result->getInfo()->getGroupId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID or Phone number ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

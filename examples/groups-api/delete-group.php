@@ -23,6 +23,8 @@ try {
     // $result->getInfo()->getId();
     // $result->getInfo()->getName();
     // $result->getInfo()->getTotalPhoneNumbers();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

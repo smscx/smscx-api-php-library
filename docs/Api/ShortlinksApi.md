@@ -62,7 +62,9 @@ try {
     // $result->getInfo()->getName();
     // $result->getInfo()->getOriginalUrl();
     // $result->getInfo()->getShortUrl();
- catch (Smscx\Client\Exception\DuplicateIdException $e) {
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
+} catch (Smscx\Client\Exception\DuplicateIdException $e) {
     //Code for duplicate id    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
@@ -134,6 +136,8 @@ $short_id = 'KgTX';
 try {
     $result = $smscx->deleteShortlink($short_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Shortlink ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -204,6 +208,8 @@ $short_id = 'KgTX';
 try {
     $result = $smscx->exportShortlinkHitsToCSV($short_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Shortlink ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -273,6 +279,8 @@ $short_id = 'KgTX';
 try {
     $result = $smscx->exportShortlinkHitsToXLSX($short_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Shortlink ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -374,6 +382,8 @@ try {
         // $v->getCity();
         // $v->getDatetime();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Shortlink ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -526,6 +536,8 @@ try {
     $result = $smscx->updateShortlink($short_id, $shortlink_update_request);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Shortlink ID not found    
 } catch (Smscx\Client\Exception\DuplicateValueException $e) {

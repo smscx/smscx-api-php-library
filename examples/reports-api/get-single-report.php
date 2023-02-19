@@ -36,6 +36,8 @@ try {
     // $result->getData()->getChannel();
     // $result->getData()->getText();
     // $result->getData()->getTextAnalysis();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Message ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

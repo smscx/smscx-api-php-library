@@ -52,6 +52,8 @@ try {
     $result = $smscx->cancelOtp($otp_id);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //OTP ID not found    
 } catch (Smscx\Client\Exception\OtpActionNotAllowedException $e) {
@@ -148,6 +150,8 @@ try {
     // $result->getOtpCallbackUrl();
     // $result->getDateCreated();
     // $result->getDateExpires();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //OTP ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -260,16 +264,21 @@ $new_otp_request = [
 try {
     $result = $smscx->newOtp($new_otp_request);
     print_r($result);
+    // $result->getOtpId();
+    // $result->getTrackId();
     // $result->getPhoneNumber();
     // $result->getCountryIso();
-    // $result->getFrom();
-    // $result->getTemplate();
-    // $result->getTrackId();
-    // $result->getTtl();
+    // $result->getStatus();
+    // $result->getCost();
+    // $result->getParts();
     // $result->getMaxAttempts();
-    // $result->getPinType();
-    // $result->getPinLength();
+    // $result->getAttempts();
+    // $result->getTtl();
     // $result->getOtpCallbackUrl();
+    // $result->getDateCreated();
+    // $result->getDateExpires();  
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
     //Code for Invalid phone number
 } catch (Smscx\Client\Exception\InsufficientBalanceException $e) {
@@ -353,6 +362,8 @@ $pin = '2691';
 try {
     $result = $smscx->verifyOtp($otp_id, $pin);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPinException $e) {
     // Code for Invalid PIN
 } catch (Smscx\Client\Exception\OtpAlreadyVerifiedException $e) {

@@ -72,6 +72,8 @@ $limit = 100; // int | A limit on the number of objects to be returned
 try {
     $result = $smscx->exportAdvancedReportToCSV($period, $start_date, $end_date, $channel, $source, $delivery_report, $country_iso, $limit);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling ReportsApi->exportAdvancedReportToCSV: ', $e->getMessage(), PHP_EOL;
 }
@@ -166,6 +168,8 @@ $limit = 100; // int | A limit on the number of objects to be returned
 try {
     $result = $smscx->exportAdvancedReportToXLSX($period, $start_date, $end_date, $channel, $source, $delivery_report, $country_iso, $limit);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling ReportsApi->exportAdvancedReportToXLSX: ', $e->getMessage(), PHP_EOL;
 }
@@ -242,6 +246,8 @@ $campaign_id = '4baf0298-0c21-4df1-a60a-6e3476e95e0b'; // string | Identifier of
 try {
     $result = $smscx->exportCampaignReportToCSV($campaign_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Campaign ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -315,6 +321,8 @@ $campaign_id = '4baf0298-0c21-4df1-a60a-6e3476e95e0b'; // string | Identifier of
 try {
     $result = $smscx->exportCampaignReportToXLSX($campaign_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Campaign ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -400,8 +408,8 @@ $delivery_report = 'delivered'; // string |
 $country_iso = 'fr'; // string | Two-letter country code defined in ISO-3166 alpha 2 standard (case insensitive)
 $short_response = false; // bool | If set to true, it will return the full `info` object and an empty `data` object
 $limit = 100; // int | A limit on the number of objects to be returned
-$next = 'NTM2NTA'; // string | The next token used to retrieve additional data
-$previous = 'NTQxNTA'; // string | The previous token used to retrieve additional data
+$next = null; // string | The next token used to retrieve additional data
+$previous = null; // string | The previous token used to retrieve additional data
 
 try {
     $result = $smscx->getAdvancedReport($period, $start_date, $end_date, $channel, $source, $delivery_report, $country_iso, $short_response, $limit, $next, $previous);
@@ -427,6 +435,8 @@ try {
         // $v->getText();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -506,8 +516,8 @@ $smscx = new Smscx\Client\Api\ReportsApi(
 $campaign_id = '4baf0298-0c21-4df1-a60a-6e3476e95e0b'; // string | Identifier of a sent campaign
 $short_response = false; // bool | If set to true, it will return the full `info` object and an empty `data` object
 $limit = 100; // int | A limit on the number of objects to be returned
-$next = 'NTM2NTA'; // string | The next token used to retrieve additional data
-$previous = 'NTQxNTA'; // string | The previous token used to retrieve additional data
+$next = null; // string | The next token used to retrieve additional data
+$previous = null; // string | The previous token used to retrieve additional data
 
 try {
     $result = $smscx->getCampaignReport($campaign_id, $short_response, $limit, $next, $previous);
@@ -536,6 +546,8 @@ try {
         // $v->getText();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Campaign ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -629,6 +641,8 @@ try {
         // $v->getDatetimeScheduled();
         // $v->getStatus();
     } 
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling ReportsApi->getCampaignsList: ', $e->getMessage(), PHP_EOL;
 }
@@ -718,6 +732,8 @@ try {
     // $result->getData()->getChannel();
     // $result->getData()->getText();
     // $result->getData()->getTextAnalysis();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Message ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -811,6 +827,8 @@ $limit = 100; // int | A limit on the number of objects to be returned
 try {
     $result = $smscx->getSummaryReports($dimension, $period, $start_date, $end_date, $limit);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ApiException $e) {

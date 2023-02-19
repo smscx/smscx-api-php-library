@@ -18,7 +18,6 @@ $smscx = new Smscx\Client\Api\NumbersApi(
 $numbers_lookup_request = [
     'phoneNumbers' => ['+336124241xx','+336123','+336129564xx','+336124241xx','+420604558xx','+336129564xx','+336123345xx','+4474006505xx','+49151237483xx','+49151286205xx','+4206018488xx','+49151232142xx','+3934237620xx'],
     //'countryIso' => 'FR',
-    'allowInvalid' => true,
     'lookupCallbackUrl' => 'https://my-callback-url/receive-lookup-details',
 ];
 
@@ -31,6 +30,8 @@ try {
     // $result->getInfo()->getTotalInvalid();
     // $result->getInfo()->getCost();
     // $result->getInfo()->getInvalid();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {
     //Code for Invalid phone number
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

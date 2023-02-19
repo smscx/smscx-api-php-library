@@ -44,7 +44,8 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'number_id' => 'string',
         'rent_period' => 'int',
         'auto_renew' => 'bool',
-        'callback_url' => 'string'
+        'callback_url' => 'string',
+        'registration_id' => 'string'
     ];
 
     /**
@@ -58,7 +59,8 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'number_id' => 'uuid',
         'rent_period' => 'int32',
         'auto_renew' => null,
-        'callback_url' => 'url'
+        'callback_url' => 'url',
+        'registration_id' => 'uuid'
     ];
 
     /**
@@ -70,7 +72,8 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'number_id' => false,
 		'rent_period' => false,
 		'auto_renew' => false,
-		'callback_url' => true
+		'callback_url' => true,
+		'registration_id' => false
     ];
 
     /**
@@ -152,7 +155,8 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'number_id' => 'numberId',
         'rent_period' => 'rentPeriod',
         'auto_renew' => 'autoRenew',
-        'callback_url' => 'callbackUrl'
+        'callback_url' => 'callbackUrl',
+        'registration_id' => 'registrationId'
     ];
 
     /**
@@ -164,7 +168,8 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'number_id' => 'setNumberId',
         'rent_period' => 'setRentPeriod',
         'auto_renew' => 'setAutoRenew',
-        'callback_url' => 'setCallbackUrl'
+        'callback_url' => 'setCallbackUrl',
+        'registration_id' => 'setRegistrationId'
     ];
 
     /**
@@ -176,7 +181,8 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'number_id' => 'getNumberId',
         'rent_period' => 'getRentPeriod',
         'auto_renew' => 'getAutoRenew',
-        'callback_url' => 'getCallbackUrl'
+        'callback_url' => 'getCallbackUrl',
+        'registration_id' => 'getRegistrationId'
     ];
 
     /**
@@ -257,6 +263,7 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('rent_period', $data ?? [], null);
         $this->setIfExists('auto_renew', $data ?? [], false);
         $this->setIfExists('callback_url', $data ?? [], null);
+        $this->setIfExists('registration_id', $data ?? [], null);
     }
 
     /**
@@ -311,6 +318,18 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
                 $this->container['rent_period'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['registration_id']) && (mb_strlen($this->container['registration_id']) > 36)) {
+            $invalidProperties[] = "invalid value for 'registration_id', the character length must be smaller than or equal to 36.";
+        }
+
+        if (!is_null($this->container['registration_id']) && (mb_strlen($this->container['registration_id']) < 36)) {
+            $invalidProperties[] = "invalid value for 'registration_id', the character length must be bigger than or equal to 36.";
+        }
+
+        if (!is_null($this->container['registration_id']) && !preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['registration_id'])) {
+            $invalidProperties[] = "invalid value for 'registration_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
         }
 
         return $invalidProperties;
@@ -467,6 +486,45 @@ class RentNumberRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['callback_url'] = $callback_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets registration_id
+     *
+     * @return string|null
+     */
+    public function getRegistrationId()
+    {
+        return $this->container['registration_id'];
+    }
+
+    /**
+     * Sets registration_id
+     *
+     * @param string|null $registration_id Applicable if the phone number requires registration. Unique identifier of the registration details for this phone number
+     *
+     * @return self
+     */
+    public function setRegistrationId($registration_id)
+    {
+        if (!is_null($registration_id) && (mb_strlen($registration_id) > 36)) {
+            throw new \InvalidArgumentException('invalid length for $registration_id when calling RentNumberRequest., must be smaller than or equal to 36.');
+        }
+        if (!is_null($registration_id) && (mb_strlen($registration_id) < 36)) {
+            throw new \InvalidArgumentException('invalid length for $registration_id when calling RentNumberRequest., must be bigger than or equal to 36.');
+        }
+        if (!is_null($registration_id) && (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $registration_id))) {
+            throw new \InvalidArgumentException("invalid value for \$registration_id when calling RentNumberRequest., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
+        }
+
+
+        if (is_null($registration_id)) {
+            throw new \InvalidArgumentException('non-nullable registration_id cannot be null');
+        }
+
+        $this->container['registration_id'] = $registration_id;
 
         return $this;
     }

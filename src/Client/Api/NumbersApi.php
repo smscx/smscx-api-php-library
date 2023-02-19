@@ -4235,14 +4235,21 @@ class NumbersApi
      * Get available numbers for rent
      *
      * @param  string $country_iso country_iso (required)
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  string $setup_time Filter by time of setup (optional)
+     * @param  bool $registration Filter by registration (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \Smscx\Client\Exception\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Smscx\Client\Model\RentNumbersResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
      */
-    public function getAvailableNumbers($country_iso)
+    public function getAvailableNumbers($country_iso, $features = null, $number_type = null, $setup_time = null, $registration = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
-        list($response) = $this->getAvailableNumbersWithHttpInfo($country_iso);
+        list($response) = $this->getAvailableNumbersWithHttpInfo($country_iso, $features, $number_type, $setup_time, $registration, $inbound_sms_sender, $include, $exclude);
         return $response;
     }
 
@@ -4252,14 +4259,21 @@ class NumbersApi
      * Get available numbers for rent
      *
      * @param  string $country_iso (required)
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  string $setup_time Filter by time of setup (optional)
+     * @param  bool $registration Filter by registration (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \Smscx\Client\Exception\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Smscx\Client\Model\RentNumbersResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAvailableNumbersWithHttpInfo($country_iso)
+    public function getAvailableNumbersWithHttpInfo($country_iso, $features = null, $number_type = null, $setup_time = null, $registration = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
-        $request = $this->getAvailableNumbersRequest($country_iso);
+        $request = $this->getAvailableNumbersRequest($country_iso, $features, $number_type, $setup_time, $registration, $inbound_sms_sender, $include, $exclude);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4523,13 +4537,20 @@ class NumbersApi
      * Get available numbers for rent
      *
      * @param  string $country_iso (required)
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  string $setup_time Filter by time of setup (optional)
+     * @param  bool $registration Filter by registration (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAvailableNumbersAsync($country_iso)
+    public function getAvailableNumbersAsync($country_iso, $features = null, $number_type = null, $setup_time = null, $registration = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
-        return $this->getAvailableNumbersAsyncWithHttpInfo($country_iso)
+        return $this->getAvailableNumbersAsyncWithHttpInfo($country_iso, $features, $number_type, $setup_time, $registration, $inbound_sms_sender, $include, $exclude)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4543,14 +4564,21 @@ class NumbersApi
      * Get available numbers for rent
      *
      * @param  string $country_iso (required)
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  string $setup_time Filter by time of setup (optional)
+     * @param  bool $registration Filter by registration (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAvailableNumbersAsyncWithHttpInfo($country_iso)
+    public function getAvailableNumbersAsyncWithHttpInfo($country_iso, $features = null, $number_type = null, $setup_time = null, $registration = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
         $returnType = '\Smscx\Client\Model\RentNumbersResponse';
-        $request = $this->getAvailableNumbersRequest($country_iso);
+        $request = $this->getAvailableNumbersRequest($country_iso, $features, $number_type, $setup_time, $registration, $inbound_sms_sender, $include, $exclude);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4681,11 +4709,18 @@ class NumbersApi
      * Create request for operation 'getAvailableNumbers'
      *
      * @param  string $country_iso (required)
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  string $setup_time Filter by time of setup (optional)
+     * @param  bool $registration Filter by registration (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAvailableNumbersRequest($country_iso)
+    public function getAvailableNumbersRequest($country_iso, $features = null, $number_type = null, $setup_time = null, $registration = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
 
         // verify the required parameter 'country_iso' is set
@@ -4702,6 +4737,27 @@ class NumbersApi
         }
 
 
+
+
+
+
+
+        if ($include !== null && strlen($include) > 1) {
+            throw new \InvalidArgumentException('invalid length for "$include" when calling NumbersApi.getAvailableNumbers, must be smaller than or equal to 1.');
+        }
+        if ($include !== null && strlen($include) < 17) {
+            throw new \InvalidArgumentException('invalid length for "$include" when calling NumbersApi.getAvailableNumbers, must be bigger than or equal to 17.');
+        }
+
+
+        if ($exclude !== null && strlen($exclude) > 1) {
+            throw new \InvalidArgumentException('invalid length for "$exclude" when calling NumbersApi.getAvailableNumbers, must be smaller than or equal to 1.');
+        }
+        if ($exclude !== null && strlen($exclude) < 17) {
+            throw new \InvalidArgumentException('invalid length for "$exclude" when calling NumbersApi.getAvailableNumbers, must be bigger than or equal to 17.');
+        }
+
+
         $resourcePath = '/numbers/rent/available/{countryIso}';
         $formParams = [];
         $queryParams = [];
@@ -4709,6 +4765,69 @@ class NumbersApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $features,
+            'features', // param base name
+            'integer', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $number_type,
+            'number_type', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $setup_time,
+            'setup_time', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $registration,
+            'registration', // param base name
+            'boolean', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $inbound_sms_sender,
+            'inbound_sms_sender', // param base name
+            'boolean', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include,
+            'include', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $exclude,
+            'exclude', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -4794,14 +4913,17 @@ class NumbersApi
      * Get inbound SMS from rented number
      *
      * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
      *
      * @throws \Smscx\Client\Exception\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Smscx\Client\Model\GetInboundSMSResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
      */
-    public function getInboundSms($rent_id)
+    public function getInboundSms($rent_id, $limit = 500, $next = null, $previous = null)
     {
-        list($response) = $this->getInboundSmsWithHttpInfo($rent_id);
+        list($response) = $this->getInboundSmsWithHttpInfo($rent_id, $limit, $next, $previous);
         return $response;
     }
 
@@ -4811,14 +4933,17 @@ class NumbersApi
      * Get inbound SMS from rented number
      *
      * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
      *
      * @throws \Smscx\Client\Exception\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Smscx\Client\Model\GetInboundSMSResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getInboundSmsWithHttpInfo($rent_id)
+    public function getInboundSmsWithHttpInfo($rent_id, $limit = 500, $next = null, $previous = null)
     {
-        $request = $this->getInboundSmsRequest($rent_id);
+        $request = $this->getInboundSmsRequest($rent_id, $limit, $next, $previous);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5112,13 +5237,16 @@ class NumbersApi
      * Get inbound SMS from rented number
      *
      * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getInboundSmsAsync($rent_id)
+    public function getInboundSmsAsync($rent_id, $limit = 500, $next = null, $previous = null)
     {
-        return $this->getInboundSmsAsyncWithHttpInfo($rent_id)
+        return $this->getInboundSmsAsyncWithHttpInfo($rent_id, $limit, $next, $previous)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5132,14 +5260,17 @@ class NumbersApi
      * Get inbound SMS from rented number
      *
      * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getInboundSmsAsyncWithHttpInfo($rent_id)
+    public function getInboundSmsAsyncWithHttpInfo($rent_id, $limit = 500, $next = null, $previous = null)
     {
         $returnType = '\Smscx\Client\Model\GetInboundSMSResponse';
-        $request = $this->getInboundSmsRequest($rent_id);
+        $request = $this->getInboundSmsRequest($rent_id, $limit, $next, $previous);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5270,11 +5401,14 @@ class NumbersApi
      * Create request for operation 'getInboundSms'
      *
      * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getInboundSmsRequest($rent_id)
+    public function getInboundSmsRequest($rent_id, $limit = 500, $next = null, $previous = null)
     {
 
         // verify the required parameter 'rent_id' is set
@@ -5301,6 +5435,33 @@ class NumbersApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $next,
+            'next', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $previous,
+            'previous', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -6233,13 +6394,20 @@ class NumbersApi
      *
      * Get list of your rented numbers
      *
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $country_iso Filter by country iso. Two-letter country code defined in ISO-3166 alpha 2 standard (case insensitive) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  bool $active_rent Filter by active rent (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getRentedNumbersAsync()
+    public function getRentedNumbersAsync($features = null, $country_iso = null, $number_type = null, $active_rent = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
-        return $this->getRentedNumbersAsyncWithHttpInfo()
+        return $this->getRentedNumbersAsyncWithHttpInfo($features, $country_iso, $number_type, $active_rent, $inbound_sms_sender, $include, $exclude)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6252,14 +6420,21 @@ class NumbersApi
      *
      * Get list of your rented numbers
      *
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $country_iso Filter by country iso. Two-letter country code defined in ISO-3166 alpha 2 standard (case insensitive) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  bool $active_rent Filter by active rent (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getRentedNumbersAsyncWithHttpInfo()
+    public function getRentedNumbersAsyncWithHttpInfo($features = null, $country_iso = null, $number_type = null, $active_rent = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
         $returnType = '\Smscx\Client\Model\RentedNumbersResponse';
-        $request = $this->getRentedNumbersRequest();
+        $request = $this->getRentedNumbersRequest($features, $country_iso, $number_type, $active_rent, $inbound_sms_sender, $include, $exclude);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6389,12 +6564,40 @@ class NumbersApi
     /**
      * Create request for operation 'getRentedNumbers'
      *
+     * @param  int $features Filter by number features (1 - receive SMS, 2 - send SMS, 1 + 2 &#x3D; 3 - send and receive SMS) (optional)
+     * @param  string $country_iso Filter by country iso. Two-letter country code defined in ISO-3166 alpha 2 standard (case insensitive) (optional)
+     * @param  string $number_type Filter by type of phone number (optional)
+     * @param  bool $active_rent Filter by active rent (optional)
+     * @param  bool $inbound_sms_sender Filter numbers that support inbound SMS from alphanumeric sender ID (optional)
+     * @param  string $include Filter phone numbers that include the following digits (optional)
+     * @param  string $exclude Filter phone numbers that exclude the following digits (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getRentedNumbersRequest()
+    public function getRentedNumbersRequest($features = null, $country_iso = null, $number_type = null, $active_rent = null, $inbound_sms_sender = null, $include = null, $exclude = null)
     {
+
+
+
+
+
+
+        if ($include !== null && strlen($include) > 1) {
+            throw new \InvalidArgumentException('invalid length for "$include" when calling NumbersApi.getRentedNumbers, must be smaller than or equal to 1.');
+        }
+        if ($include !== null && strlen($include) < 17) {
+            throw new \InvalidArgumentException('invalid length for "$include" when calling NumbersApi.getRentedNumbers, must be bigger than or equal to 17.');
+        }
+
+
+        if ($exclude !== null && strlen($exclude) > 1) {
+            throw new \InvalidArgumentException('invalid length for "$exclude" when calling NumbersApi.getRentedNumbers, must be smaller than or equal to 1.');
+        }
+        if ($exclude !== null && strlen($exclude) < 17) {
+            throw new \InvalidArgumentException('invalid length for "$exclude" when calling NumbersApi.getRentedNumbers, must be bigger than or equal to 17.');
+        }
+
 
         $resourcePath = '/numbers/rent';
         $formParams = [];
@@ -6403,6 +6606,69 @@ class NumbersApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $features,
+            'features', // param base name
+            'integer', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $country_iso,
+            'country_iso', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $number_type,
+            'number_type', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $active_rent,
+            'active_rent', // param base name
+            'boolean', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $inbound_sms_sender,
+            'inbound_sms_sender', // param base name
+            'boolean', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include,
+            'include', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $exclude,
+            'exclude', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
@@ -6484,7 +6750,7 @@ class NumbersApi
      *
      * @throws \Smscx\Client\Exception\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Smscx\Client\Model\RentNumberResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
+     * @return \Smscx\Client\Model\RenewNumberResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
      */
     public function renewRent($rent_id, $renew_rent_request)
     {
@@ -6502,7 +6768,7 @@ class NumbersApi
      *
      * @throws \Smscx\Client\Exception\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Smscx\Client\Model\RentNumberResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Smscx\Client\Model\RenewNumberResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
      */
     public function renewRentWithHttpInfo($rent_id, $renew_rent_request)
     {
@@ -6545,17 +6811,17 @@ class NumbersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Smscx\Client\Model\RentNumberResponse' === '\SplFileObject') {
+                    if ('\Smscx\Client\Model\RenewNumberResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Smscx\Client\Model\RentNumberResponse' !== 'string') {
+                        if ('\Smscx\Client\Model\RenewNumberResponse' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\RentNumberResponse', []),
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\RenewNumberResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -6666,7 +6932,7 @@ class NumbersApi
                     ];
             }
 
-            $returnType = '\Smscx\Client\Model\RentNumberResponse';
+            $returnType = '\Smscx\Client\Model\RenewNumberResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -6684,14 +6950,23 @@ class NumbersApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 400:             
+                case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Smscx\Client\Model\Model400InvalidParam',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-					$e =  new \Smscx\Client\Exception\InvalidRequestException(
+					$errorType = $e->getResponseObject()->getError()->getType();
+					$errorCode = (int) $e->getResponseObject()->getError()->getCode();
+					if ( $errorType == 'insufficient_credit' ) {
+						$className = 'InsufficientBalanceException';
+					}                    
+					else {
+						$className = 'InvalidRequestException';
+					}
+					$exceptionClass = "\\Smscx\\Client\\Exception\\".$className;                    
+					$e =  new $exceptionClass(
 						$e->getMessage(),
 						$e->getCode(),
 						$e->getResponseHeaders(),
@@ -6839,7 +7114,7 @@ class NumbersApi
      */
     public function renewRentAsyncWithHttpInfo($rent_id, $renew_rent_request)
     {
-        $returnType = '\Smscx\Client\Model\RentNumberResponse';
+        $returnType = '\Smscx\Client\Model\RenewNumberResponse';
         $request = $this->renewRentRequest($rent_id, $renew_rent_request);
 
         return $this->client
@@ -6866,7 +7141,17 @@ class NumbersApi
                     $statusCode = $response->getStatusCode();
                     switch ($statusCode) {
                         case 400:             
-                            $e =  new \Smscx\Client\Exception\InvalidRequestException(
+                            $errorObject = json_decode( (string) $response->getBody() );
+                            $errorType = $errorObject->error->type;
+                            $errorCode = (int) $errorObject->error->code;
+                            if ( $errorType == 'insufficient_credit' ) {
+                                $className = 'InsufficientBalanceException';
+                            }                              
+                            else {
+                                $className = 'InvalidRequestException';
+                            }
+                            $exceptionClass = "\\Smscx\\Client\\Exception\\".$className;
+                            $e =  new $exceptionClass(
                                 sprintf(
                                     '[%d] Error connecting to the API (%s)',
                                     $statusCode,
@@ -6876,7 +7161,7 @@ class NumbersApi
                                 $response->getHeaders(),
                                 (string) $response->getBody()
                             );
-                            break;                        
+                            break;
                         case 401:             
                             $e =  new \Smscx\Client\Exception\InvalidCredentialsException(
                                 sprintf(
@@ -7315,14 +7600,23 @@ class NumbersApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 400:             
+                case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Smscx\Client\Model\Model400InvalidParam',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-					$e =  new \Smscx\Client\Exception\InvalidRequestException(
+					$errorType = $e->getResponseObject()->getError()->getType();
+					$errorCode = (int) $e->getResponseObject()->getError()->getCode();
+					if ( $errorType == 'insufficient_credit' ) {
+						$className = 'InsufficientBalanceException';
+					}                    
+					else {
+						$className = 'InvalidRequestException';
+					}
+					$exceptionClass = "\\Smscx\\Client\\Exception\\".$className;                    
+					$e =  new $exceptionClass(
 						$e->getMessage(),
 						$e->getCode(),
 						$e->getResponseHeaders(),
@@ -7495,7 +7789,17 @@ class NumbersApi
                     $statusCode = $response->getStatusCode();
                     switch ($statusCode) {
                         case 400:             
-                            $e =  new \Smscx\Client\Exception\InvalidRequestException(
+                            $errorObject = json_decode( (string) $response->getBody() );
+                            $errorType = $errorObject->error->type;
+                            $errorCode = (int) $errorObject->error->code;
+                            if ( $errorType == 'insufficient_credit' ) {
+                                $className = 'InsufficientBalanceException';
+                            }                              
+                            else {
+                                $className = 'InvalidRequestException';
+                            }
+                            $exceptionClass = "\\Smscx\\Client\\Exception\\".$className;
+                            $e =  new $exceptionClass(
                                 sprintf(
                                     '[%d] Error connecting to the API (%s)',
                                     $statusCode,
@@ -7505,7 +7809,7 @@ class NumbersApi
                                 $response->getHeaders(),
                                 (string) $response->getBody()
                             );
-                            break;                        
+                            break;
                         case 401:             
                             $e =  new \Smscx\Client\Exception\InvalidCredentialsException(
                                 sprintf(
@@ -7709,6 +8013,2381 @@ class NumbersApi
             $httpBody
         );
     }
+
+
+
+    /**
+     * Operation editRentSettings
+     *
+     * Edit settings for active rent
+     *
+     * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  \Smscx\Client\Model\EditRentRequest $edit_rent_request  (required)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Smscx\Client\Model\EditRentResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
+     */
+    public function editRentSettings($rent_id, $edit_rent_request)
+    {
+        list($response) = $this->editRentSettingsWithHttpInfo($rent_id, $edit_rent_request);
+        return $response;
+    }
+
+    /**
+     * Operation editRentSettingsWithHttpInfo
+     *
+     * Edit settings for active rent
+     *
+     * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  \Smscx\Client\Model\EditRentRequest $edit_rent_request  (required)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Smscx\Client\Model\EditRentResponse|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function editRentSettingsWithHttpInfo($rent_id, $edit_rent_request)
+    {
+        $request = $this->editRentSettingsRequest($rent_id, $edit_rent_request);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Smscx\Client\Model\EditRentResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\EditRentResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\EditRentResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Smscx\Client\Model\Model400InvalidParam' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model400InvalidParam' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model400InvalidParam', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Smscx\Client\Model\Model401Unauthorized' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model401Unauthorized' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model401Unauthorized', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Smscx\Client\Model\Model403InsufficientScope' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model403InsufficientScope' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model403InsufficientScope', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Smscx\Client\Model\Model404NotFound' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model404NotFound' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model404NotFound', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 405:
+                    if ('\Smscx\Client\Model\Model405MethodNotAllowed' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model405MethodNotAllowed' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model405MethodNotAllowed', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Smscx\Client\Model\Model429TooManyRequests' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model429TooManyRequests' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model429TooManyRequests', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\Smscx\Client\Model\Model500ServerError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model500ServerError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model500ServerError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Smscx\Client\Model\EditRentResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model400InvalidParam',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidRequestException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 401:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model401Unauthorized',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 403:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model403InsufficientScope',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InsufficientScopeException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 404:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model404NotFound',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 405:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model405MethodNotAllowed',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 429:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model429TooManyRequests',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 500:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model500ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ServerErrorException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation editRentSettingsAsync
+     *
+     * Edit settings for active rent
+     *
+     * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  \Smscx\Client\Model\EditRentRequest $edit_rent_request  (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function editRentSettingsAsync($rent_id, $edit_rent_request)
+    {
+        return $this->editRentSettingsAsyncWithHttpInfo($rent_id, $edit_rent_request)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation editRentSettingsAsyncWithHttpInfo
+     *
+     * Edit settings for active rent
+     *
+     * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  \Smscx\Client\Model\EditRentRequest $edit_rent_request  (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function editRentSettingsAsyncWithHttpInfo($rent_id, $edit_rent_request)
+    {
+        $returnType = '\Smscx\Client\Model\EditRentResponse';
+        $request = $this->editRentSettingsRequest($rent_id, $edit_rent_request);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    switch ($statusCode) {
+                        case 400:             
+                            $e =  new \Smscx\Client\Exception\InvalidRequestException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;                        
+                        case 401:             
+                            $e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 403:             
+                            $e =  new \Smscx\Client\Exception\InsufficientScopeException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 404:             
+                            $e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 405:             
+                            $e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 429:             
+                            $e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 500:             
+                            $e =  new \Smscx\Client\Exception\ServerErrorException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        default:
+                            $e =  new \Smscx\Client\Exception\ApiException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                    }
+                    throw $e;
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'editRentSettings'
+     *
+     * @param  string $rent_id Identifier of the rental operation (required)
+     * @param  \Smscx\Client\Model\EditRentRequest $edit_rent_request  (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function editRentSettingsRequest($rent_id, $edit_rent_request)
+    {
+
+        // verify the required parameter 'rent_id' is set
+        if ($rent_id === null || (is_array($rent_id) && count($rent_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $rent_id when calling editRentSettings'
+            );
+        }
+        if (strlen($rent_id) > 36) {
+            throw new \InvalidArgumentException('invalid length for "$rent_id" when calling NumbersApi.editRentSettings, must be smaller than or equal to 36.');
+        }
+        if (strlen($rent_id) < 36) {
+            throw new \InvalidArgumentException('invalid length for "$rent_id" when calling NumbersApi.editRentSettings, must be bigger than or equal to 36.');
+        }
+        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $rent_id)) {
+            throw new \InvalidArgumentException("invalid value for \"rent_id\" when calling NumbersApi.editRentSettings, must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
+        }
+
+
+        // verify the required parameter 'edit_rent_request' is set
+        if ($edit_rent_request === null || (is_array($edit_rent_request) && count($edit_rent_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $edit_rent_request when calling editRentSettings'
+            );
+        }
+
+        $resourcePath = '/numbers/rent/{rentId}/edit';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($rent_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'rentId' . '}',
+                ObjectSerializer::toPathValue($rent_id),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($edit_rent_request)) {
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($edit_rent_request));
+            } else {
+                $httpBody = $edit_rent_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix();
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PATCH',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation exportNumberLookupReportToCSV
+     *
+     * Export number lookup campaign to CSV
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return string|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
+     */
+    public function exportNumberLookupReportToCSV($lookup_bulk_id)
+    {
+        list($response) = $this->exportNumberLookupReportToCSVWithHttpInfo($lookup_bulk_id);
+        return $response;
+    }
+
+    /**
+     * Operation exportNumberLookupReportToCSVWithHttpInfo
+     *
+     * Export number lookup campaign to CSV
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of string|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function exportNumberLookupReportToCSVWithHttpInfo($lookup_bulk_id)
+    {
+        $request = $this->exportNumberLookupReportToCSVRequest($lookup_bulk_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Smscx\Client\Model\Model400InvalidParam' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model400InvalidParam' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model400InvalidParam', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Smscx\Client\Model\Model401Unauthorized' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model401Unauthorized' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model401Unauthorized', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Smscx\Client\Model\Model403InsufficientScope' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model403InsufficientScope' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model403InsufficientScope', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Smscx\Client\Model\Model404NotFound' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model404NotFound' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model404NotFound', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 405:
+                    if ('\Smscx\Client\Model\Model405MethodNotAllowed' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model405MethodNotAllowed' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model405MethodNotAllowed', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Smscx\Client\Model\Model429TooManyRequests' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model429TooManyRequests' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model429TooManyRequests', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\Smscx\Client\Model\Model500ServerError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model500ServerError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model500ServerError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model400InvalidParam',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidRequestException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 401:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model401Unauthorized',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 403:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model403InsufficientScope',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InsufficientScopeException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 404:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model404NotFound',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 405:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model405MethodNotAllowed',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 429:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model429TooManyRequests',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 500:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model500ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ServerErrorException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation exportNumberLookupReportToCSVAsync
+     *
+     * Export number lookup campaign to CSV
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportNumberLookupReportToCSVAsync($lookup_bulk_id)
+    {
+        return $this->exportNumberLookupReportToCSVAsyncWithHttpInfo($lookup_bulk_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation exportNumberLookupReportToCSVAsyncWithHttpInfo
+     *
+     * Export number lookup campaign to CSV
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportNumberLookupReportToCSVAsyncWithHttpInfo($lookup_bulk_id)
+    {
+        $returnType = 'string';
+        $request = $this->exportNumberLookupReportToCSVRequest($lookup_bulk_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    switch ($statusCode) {
+                        case 400:             
+                            $e =  new \Smscx\Client\Exception\InvalidRequestException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;                        
+                        case 401:             
+                            $e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 403:             
+                            $e =  new \Smscx\Client\Exception\InsufficientScopeException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 404:             
+                            $e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 405:             
+                            $e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 429:             
+                            $e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 500:             
+                            $e =  new \Smscx\Client\Exception\ServerErrorException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        default:
+                            $e =  new \Smscx\Client\Exception\ApiException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                    }
+                    throw $e;
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'exportNumberLookupReportToCSV'
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function exportNumberLookupReportToCSVRequest($lookup_bulk_id)
+    {
+
+        // verify the required parameter 'lookup_bulk_id' is set
+        if ($lookup_bulk_id === null || (is_array($lookup_bulk_id) && count($lookup_bulk_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $lookup_bulk_id when calling exportNumberLookupReportToCSV'
+            );
+        }
+        if (strlen($lookup_bulk_id) > 36) {
+            throw new \InvalidArgumentException('invalid length for "$lookup_bulk_id" when calling NumbersApi.exportNumberLookupReportToCSV, must be smaller than or equal to 36.');
+        }
+        if (strlen($lookup_bulk_id) < 36) {
+            throw new \InvalidArgumentException('invalid length for "$lookup_bulk_id" when calling NumbersApi.exportNumberLookupReportToCSV, must be bigger than or equal to 36.');
+        }
+        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $lookup_bulk_id)) {
+            throw new \InvalidArgumentException("invalid value for \"lookup_bulk_id\" when calling NumbersApi.exportNumberLookupReportToCSV, must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
+        }
+
+
+        $resourcePath = '/numbers/lookup/lookupBulkId/{lookupBulkId}/csv';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($lookup_bulk_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'lookupBulkId' . '}',
+                ObjectSerializer::toPathValue($lookup_bulk_id),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/csv', 'application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/csv', 'application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix();
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation exportNumberLookupReportToXLSX
+     *
+     * Export number lookup campaign to XLSX
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
+     */
+    public function exportNumberLookupReportToXLSX($lookup_bulk_id)
+    {
+        list($response) = $this->exportNumberLookupReportToXLSXWithHttpInfo($lookup_bulk_id);
+        return $response;
+    }
+
+    /**
+     * Operation exportNumberLookupReportToXLSXWithHttpInfo
+     *
+     * Export number lookup campaign to XLSX
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject|\Smscx\Client\Model\Model400InvalidParam|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model404NotFound|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function exportNumberLookupReportToXLSXWithHttpInfo($lookup_bulk_id)
+    {
+        $request = $this->exportNumberLookupReportToXLSXRequest($lookup_bulk_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Smscx\Client\Model\Model400InvalidParam' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model400InvalidParam' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model400InvalidParam', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Smscx\Client\Model\Model401Unauthorized' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model401Unauthorized' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model401Unauthorized', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Smscx\Client\Model\Model403InsufficientScope' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model403InsufficientScope' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model403InsufficientScope', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Smscx\Client\Model\Model404NotFound' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model404NotFound' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model404NotFound', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 405:
+                    if ('\Smscx\Client\Model\Model405MethodNotAllowed' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model405MethodNotAllowed' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model405MethodNotAllowed', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Smscx\Client\Model\Model429TooManyRequests' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model429TooManyRequests' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model429TooManyRequests', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\Smscx\Client\Model\Model500ServerError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model500ServerError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model500ServerError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model400InvalidParam',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidRequestException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 401:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model401Unauthorized',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 403:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model403InsufficientScope',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InsufficientScopeException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 404:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model404NotFound',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 405:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model405MethodNotAllowed',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 429:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model429TooManyRequests',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 500:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model500ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ServerErrorException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation exportNumberLookupReportToXLSXAsync
+     *
+     * Export number lookup campaign to XLSX
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportNumberLookupReportToXLSXAsync($lookup_bulk_id)
+    {
+        return $this->exportNumberLookupReportToXLSXAsyncWithHttpInfo($lookup_bulk_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation exportNumberLookupReportToXLSXAsyncWithHttpInfo
+     *
+     * Export number lookup campaign to XLSX
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportNumberLookupReportToXLSXAsyncWithHttpInfo($lookup_bulk_id)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->exportNumberLookupReportToXLSXRequest($lookup_bulk_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    switch ($statusCode) {
+                        case 400:             
+                            $e =  new \Smscx\Client\Exception\InvalidRequestException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;                        
+                        case 401:             
+                            $e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 403:             
+                            $e =  new \Smscx\Client\Exception\InsufficientScopeException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 404:             
+                            $e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 405:             
+                            $e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 429:             
+                            $e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 500:             
+                            $e =  new \Smscx\Client\Exception\ServerErrorException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        default:
+                            $e =  new \Smscx\Client\Exception\ApiException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                    }
+                    throw $e;
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'exportNumberLookupReportToXLSX'
+     *
+     * @param  string $lookup_bulk_id Identifier of the bulk number lookup campaign (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function exportNumberLookupReportToXLSXRequest($lookup_bulk_id)
+    {
+
+        // verify the required parameter 'lookup_bulk_id' is set
+        if ($lookup_bulk_id === null || (is_array($lookup_bulk_id) && count($lookup_bulk_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $lookup_bulk_id when calling exportNumberLookupReportToXLSX'
+            );
+        }
+        if (strlen($lookup_bulk_id) > 36) {
+            throw new \InvalidArgumentException('invalid length for "$lookup_bulk_id" when calling NumbersApi.exportNumberLookupReportToXLSX, must be smaller than or equal to 36.');
+        }
+        if (strlen($lookup_bulk_id) < 36) {
+            throw new \InvalidArgumentException('invalid length for "$lookup_bulk_id" when calling NumbersApi.exportNumberLookupReportToXLSX, must be bigger than or equal to 36.');
+        }
+        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $lookup_bulk_id)) {
+            throw new \InvalidArgumentException("invalid value for \"lookup_bulk_id\" when calling NumbersApi.exportNumberLookupReportToXLSX, must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
+        }
+
+
+        $resourcePath = '/numbers/lookup/lookupBulkId/{lookupBulkId}/xlsx';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($lookup_bulk_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'lookupBulkId' . '}',
+                ObjectSerializer::toPathValue($lookup_bulk_id),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix();
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+
+    /**
+     * Operation getBulkLookupCampaigns
+     *
+     * Get list of bulk lookup campaigns
+     *
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Smscx\Client\Model\BulkLookupCampaignsResponse|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError
+     */
+    public function getBulkLookupCampaigns($limit = 500, $next = null, $previous = null)
+    {
+        list($response) = $this->getBulkLookupCampaignsWithHttpInfo($limit, $next, $previous);
+        return $response;
+    }
+
+    /**
+     * Operation getBulkLookupCampaignsWithHttpInfo
+     *
+     * Get list of bulk lookup campaigns
+     *
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
+     *
+     * @throws \Smscx\Client\Exception\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Smscx\Client\Model\BulkLookupCampaignsResponse|\Smscx\Client\Model\Model401Unauthorized|\Smscx\Client\Model\Model403InsufficientScope|\Smscx\Client\Model\Model405MethodNotAllowed|\Smscx\Client\Model\Model429TooManyRequests|\Smscx\Client\Model\Model500ServerError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getBulkLookupCampaignsWithHttpInfo($limit = 500, $next = null, $previous = null)
+    {
+        $request = $this->getBulkLookupCampaignsRequest($limit, $next, $previous);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Smscx\Client\Model\BulkLookupCampaignsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\BulkLookupCampaignsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\BulkLookupCampaignsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Smscx\Client\Model\Model401Unauthorized' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model401Unauthorized' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model401Unauthorized', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Smscx\Client\Model\Model403InsufficientScope' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model403InsufficientScope' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model403InsufficientScope', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 405:
+                    if ('\Smscx\Client\Model\Model405MethodNotAllowed' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model405MethodNotAllowed' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model405MethodNotAllowed', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Smscx\Client\Model\Model429TooManyRequests' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model429TooManyRequests' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model429TooManyRequests', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\Smscx\Client\Model\Model500ServerError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Smscx\Client\Model\Model500ServerError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Smscx\Client\Model\Model500ServerError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Smscx\Client\Model\BulkLookupCampaignsResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model400InvalidParam',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidRequestException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 401:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model401Unauthorized',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 403:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model403InsufficientScope',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\InsufficientScopeException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 404:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model404NotFound',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 405:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model405MethodNotAllowed',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 429:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model429TooManyRequests',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+                case 500:             
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Smscx\Client\Model\Model500ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+					$e =  new \Smscx\Client\Exception\ServerErrorException(
+						$e->getMessage(),
+						$e->getCode(),
+						$e->getResponseHeaders(),
+						$e->getResponseBody()
+					);
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getBulkLookupCampaignsAsync
+     *
+     * Get list of bulk lookup campaigns
+     *
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getBulkLookupCampaignsAsync($limit = 500, $next = null, $previous = null)
+    {
+        return $this->getBulkLookupCampaignsAsyncWithHttpInfo($limit, $next, $previous)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getBulkLookupCampaignsAsyncWithHttpInfo
+     *
+     * Get list of bulk lookup campaigns
+     *
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getBulkLookupCampaignsAsyncWithHttpInfo($limit = 500, $next = null, $previous = null)
+    {
+        $returnType = '\Smscx\Client\Model\BulkLookupCampaignsResponse';
+        $request = $this->getBulkLookupCampaignsRequest($limit, $next, $previous);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    switch ($statusCode) {
+                        case 400:             
+                            $e =  new \Smscx\Client\Exception\InvalidRequestException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;                        
+                        case 401:             
+                            $e =  new \Smscx\Client\Exception\InvalidCredentialsException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 403:             
+                            $e =  new \Smscx\Client\Exception\InsufficientScopeException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 404:             
+                            $e =  new \Smscx\Client\Exception\ResourceNotFoundException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 405:             
+                            $e =  new \Smscx\Client\Exception\ApiMethodNotAllowedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 429:             
+                            $e =  new \Smscx\Client\Exception\RateLimitExcedeedException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        case 500:             
+                            $e =  new \Smscx\Client\Exception\ServerErrorException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                        default:
+                            $e =  new \Smscx\Client\Exception\ApiException(
+                                sprintf(
+                                    '[%d] Error connecting to the API (%s)',
+                                    $statusCode,
+                                    $exception->getRequest()->getUri()
+                                ),						
+                                $statusCode,
+                                $response->getHeaders(),
+                                (string) $response->getBody()
+                            );
+                            break;
+                    }
+                    throw $e;
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getBulkLookupCampaigns'
+     *
+     * @param  int $limit A limit on the number of objects to be returned (optional, default to 500)
+     * @param  string $next The next token used to retrieve additional data (optional)
+     * @param  string $previous The previous token used to retrieve additional data (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getBulkLookupCampaignsRequest($limit = 500, $next = null, $previous = null)
+    {
+
+
+
+
+        $resourcePath = '/numbers/lookup';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $next,
+            'next', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $previous,
+            'previous', // param base name
+            'string', // type
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix();
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
 
 
     /**

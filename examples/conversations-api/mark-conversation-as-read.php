@@ -20,6 +20,8 @@ $conversation_id = 'c38fa60d-ce8f-4918-8b9d-d991bc44cb73';
 try {
     $result = $smscx->markConversationAsRead($conversation_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Conversation ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

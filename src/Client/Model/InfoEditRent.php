@@ -1,6 +1,6 @@
 <?php
 /**
- * RentalCost
+ * InfoEditRent
  *
  * PHP version 7.4
  *
@@ -16,7 +16,7 @@ use \ArrayAccess;
 use \Smscx\ObjectSerializer;
 
 /**
- * RentalCost Class Doc Comment
+ * InfoEditRent Class Doc Comment
  *
  * @category Class
  * @package  Smscx
@@ -24,7 +24,7 @@ use \Smscx\ObjectSerializer;
  * @link     https://sms.cx
  * @implements \ArrayAccess<string, mixed>
  */
-class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
+class InfoEditRent implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -33,7 +33,7 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $clientModelName = 'RentalCost';
+    protected static $clientModelName = 'InfoEditRent';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -41,9 +41,8 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $clientTypes = [
-        '_1' => 'float',
-        '_7' => 'float',
-        '_30' => 'float'
+        'rent_id' => 'string',
+        'datetime' => '\DateTime'
     ];
 
     /**
@@ -54,9 +53,8 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $clientFormats = [
-        '_1' => 'decimal',
-        '_7' => 'decimal',
-        '_30' => 'decimal'
+        'rent_id' => 'uuid',
+        'datetime' => 'date-time'
     ];
 
     /**
@@ -65,9 +63,8 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $clientNullables = [
-        '_1' => false,
-		'_7' => false,
-		'_30' => false
+        'rent_id' => false,
+		'datetime' => false
     ];
 
     /**
@@ -146,9 +143,8 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        '_1' => '1',
-        '_7' => '7',
-        '_30' => '30'
+        'rent_id' => 'rentId',
+        'datetime' => 'datetime'
     ];
 
     /**
@@ -157,9 +153,8 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        '_1' => 'set1',
-        '_7' => 'set7',
-        '_30' => 'set30'
+        'rent_id' => 'setRentId',
+        'datetime' => 'setDatetime'
     ];
 
     /**
@@ -168,9 +163,8 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        '_1' => 'get1',
-        '_7' => 'get7',
-        '_30' => 'get30'
+        'rent_id' => 'getRentId',
+        'datetime' => 'getDatetime'
     ];
 
     /**
@@ -230,9 +224,8 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('_1', $data ?? [], null);
-        $this->setIfExists('_7', $data ?? [], null);
-        $this->setIfExists('_30', $data ?? [], null);
+        $this->setIfExists('rent_id', $data ?? [], null);
+        $this->setIfExists('datetime', $data ?? [], null);
     }
 
     /**
@@ -262,14 +255,23 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['_1'] === null) {
-            $invalidProperties[] = "'_1' can't be null";
+        if ($this->container['rent_id'] === null) {
+            $invalidProperties[] = "'rent_id' can't be null";
         }
-        if ($this->container['_7'] === null) {
-            $invalidProperties[] = "'_7' can't be null";
+        if ((mb_strlen($this->container['rent_id']) > 36)) {
+            $invalidProperties[] = "invalid value for 'rent_id', the character length must be smaller than or equal to 36.";
         }
-        if ($this->container['_30'] === null) {
-            $invalidProperties[] = "'_30' can't be null";
+
+        if ((mb_strlen($this->container['rent_id']) < 36)) {
+            $invalidProperties[] = "invalid value for 'rent_id', the character length must be bigger than or equal to 36.";
+        }
+
+        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['rent_id'])) {
+            $invalidProperties[] = "invalid value for 'rent_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
+        }
+
+        if ($this->container['datetime'] === null) {
+            $invalidProperties[] = "'datetime' can't be null";
         }
         return $invalidProperties;
     }
@@ -287,88 +289,69 @@ class RentalCost implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets _1
+     * Gets rent_id
      *
-     * @return float
+     * @return string
      */
-    public function get1()
+    public function getRentId()
     {
-        return $this->container['_1'];
+        return $this->container['rent_id'];
     }
 
     /**
-     * Sets _1
+     * Sets rent_id
      *
-     * @param float $_1 Cost to rent the number for 1 day
+     * @param string $rent_id Unique identifier of the rent operation
      *
      * @return self
      */
-    public function set1($_1)
+    public function setRentId($rent_id)
     {
-
-        if (is_null($_1)) {
-            throw new \InvalidArgumentException('non-nullable _1 cannot be null');
+        if ((mb_strlen($rent_id) > 36)) {
+            throw new \InvalidArgumentException('invalid length for $rent_id when calling InfoEditRent., must be smaller than or equal to 36.');
+        }
+        if ((mb_strlen($rent_id) < 36)) {
+            throw new \InvalidArgumentException('invalid length for $rent_id when calling InfoEditRent., must be bigger than or equal to 36.');
+        }
+        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $rent_id))) {
+            throw new \InvalidArgumentException("invalid value for \$rent_id when calling InfoEditRent., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
         }
 
-        $this->container['_1'] = $_1;
+
+        if (is_null($rent_id)) {
+            throw new \InvalidArgumentException('non-nullable rent_id cannot be null');
+        }
+
+        $this->container['rent_id'] = $rent_id;
 
         return $this;
     }
 
     /**
-     * Gets _7
+     * Gets datetime
      *
-     * @return float
+     * @return \DateTime
      */
-    public function get7()
+    public function getDatetime()
     {
-        return $this->container['_7'];
+        return $this->container['datetime'];
     }
 
     /**
-     * Sets _7
+     * Sets datetime
      *
-     * @param float $_7 Cost to rent the number for 7 days (1 week)
+     * @param \DateTime $datetime datetime
      *
      * @return self
      */
-    public function set7($_7)
+    public function setDatetime($datetime)
     {
 
-        if (is_null($_7)) {
-            throw new \InvalidArgumentException('non-nullable _7 cannot be null');
+        if (is_null($datetime)) {
+            throw new \InvalidArgumentException('non-nullable datetime cannot be null');
         }
 
-        $this->container['_7'] = $_7;
-
-        return $this;
-    }
-
-    /**
-     * Gets _30
-     *
-     * @return float
-     */
-    public function get30()
-    {
-        return $this->container['_30'];
-    }
-
-    /**
-     * Sets _30
-     *
-     * @param float $_30 Cost to rent the number for 1 month
-     *
-     * @return self
-     */
-    public function set30($_30)
-    {
-
-        if (is_null($_30)) {
-            throw new \InvalidArgumentException('non-nullable _30 cannot be null');
-        }
-
-        $this->container['_30'] = $_30;
+        $this->container['datetime'] = $datetime;
 
         return $this;
     }

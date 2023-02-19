@@ -24,6 +24,8 @@ try {
     // $result->getInfo()->getId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID or PhoneNumber ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

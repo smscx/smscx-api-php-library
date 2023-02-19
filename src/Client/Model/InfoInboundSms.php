@@ -41,6 +41,7 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $clientTypes = [
+        'rent_id' => 'string',
         'phone_number' => 'string',
         'country_iso' => 'string'
     ];
@@ -53,6 +54,7 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $clientFormats = [
+        'rent_id' => 'uuid',
         'phone_number' => null,
         'country_iso' => null
     ];
@@ -63,7 +65,8 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $clientNullables = [
-        'phone_number' => false,
+        'rent_id' => false,
+		'phone_number' => false,
 		'country_iso' => false
     ];
 
@@ -143,6 +146,7 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'rent_id' => 'rentId',
         'phone_number' => 'phoneNumber',
         'country_iso' => 'countryIso'
     ];
@@ -153,6 +157,7 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'rent_id' => 'setRentId',
         'phone_number' => 'setPhoneNumber',
         'country_iso' => 'setCountryIso'
     ];
@@ -163,6 +168,7 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'rent_id' => 'getRentId',
         'phone_number' => 'getPhoneNumber',
         'country_iso' => 'getCountryIso'
     ];
@@ -224,6 +230,7 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('rent_id', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('country_iso', $data ?? [], null);
     }
@@ -255,6 +262,21 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['rent_id'] === null) {
+            $invalidProperties[] = "'rent_id' can't be null";
+        }
+        if ((mb_strlen($this->container['rent_id']) > 36)) {
+            $invalidProperties[] = "invalid value for 'rent_id', the character length must be smaller than or equal to 36.";
+        }
+
+        if ((mb_strlen($this->container['rent_id']) < 36)) {
+            $invalidProperties[] = "invalid value for 'rent_id', the character length must be bigger than or equal to 36.";
+        }
+
+        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['rent_id'])) {
+            $invalidProperties[] = "invalid value for 'rent_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
+        }
+
         if ($this->container['phone_number'] === null) {
             $invalidProperties[] = "'phone_number' can't be null";
         }
@@ -283,6 +305,45 @@ class InfoInboundSms implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets rent_id
+     *
+     * @return string
+     */
+    public function getRentId()
+    {
+        return $this->container['rent_id'];
+    }
+
+    /**
+     * Sets rent_id
+     *
+     * @param string $rent_id Unique identifier of the rent operation
+     *
+     * @return self
+     */
+    public function setRentId($rent_id)
+    {
+        if ((mb_strlen($rent_id) > 36)) {
+            throw new \InvalidArgumentException('invalid length for $rent_id when calling InfoInboundSms., must be smaller than or equal to 36.');
+        }
+        if ((mb_strlen($rent_id) < 36)) {
+            throw new \InvalidArgumentException('invalid length for $rent_id when calling InfoInboundSms., must be bigger than or equal to 36.');
+        }
+        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $rent_id))) {
+            throw new \InvalidArgumentException("invalid value for \$rent_id when calling InfoInboundSms., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
+        }
+
+
+        if (is_null($rent_id)) {
+            throw new \InvalidArgumentException('non-nullable rent_id cannot be null');
+        }
+
+        $this->container['rent_id'] = $rent_id;
+
+        return $this;
+    }
 
     /**
      * Gets phone_number

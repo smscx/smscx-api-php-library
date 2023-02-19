@@ -24,6 +24,8 @@ $limit = 100; // int | A limit on the number of objects to be returned
 try {
     $result = $smscx->getSummaryReports($dimension, $period, $start_date, $end_date, $limit);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ApiException $e) {

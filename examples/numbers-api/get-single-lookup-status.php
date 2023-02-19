@@ -20,6 +20,8 @@ $lookup_id = '68aa4d9f-ee25-4a32-95d0-7272efe3b238';
 try {
     $result = $smscx->getSingleLookupStatus($lookup_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Lookup ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

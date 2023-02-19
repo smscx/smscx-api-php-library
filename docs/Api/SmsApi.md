@@ -58,6 +58,8 @@ try {
     // $result->getInfo()->getParts();
     // $result->getInfo()->getCreditReturned();
     // $result->getInfo()->getChannel();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Message ID not found    
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {
@@ -144,6 +146,8 @@ try {
     // $result->getInfo()->getPartsDeleted();
     // $result->getInfo()->getCreditReturned();
     // $result->getInfo()->getChannel();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Campaign ID not found    
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {
@@ -275,6 +279,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\NoCoverageException $e) {
     //Code for No coverage
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -410,6 +416,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\NoCoverageException $e) {
     //Code for No coverage
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -550,6 +558,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\NoCoverageException $e) {
     //Code for No coverage
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -690,6 +700,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\NoCoverageException $e) {
     //Code for No coverage
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

@@ -24,6 +24,8 @@ try {
     // $result->getScopes();
     // $result->getTokenExpiration();
     // $result->getSettings();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Application ID not found
 } catch (Smscx\Client\Exception\ApiException $e) {

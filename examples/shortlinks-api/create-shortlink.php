@@ -27,7 +27,9 @@ try {
     // $result->getInfo()->getName();
     // $result->getInfo()->getOriginalUrl();
     // $result->getInfo()->getShortUrl();
- catch (Smscx\Client\Exception\DuplicateIdException $e) {
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
+} catch (Smscx\Client\Exception\DuplicateIdException $e) {
     //Code for duplicate id    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    

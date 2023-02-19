@@ -23,6 +23,8 @@ try {
     // $result->getInfo()->getParts();
     // $result->getInfo()->getCreditReturned();
     // $result->getInfo()->getChannel();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Message ID not found    
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {

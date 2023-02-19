@@ -33,6 +33,8 @@ try {
     // $result->getOtpCallbackUrl();
     // $result->getDateCreated();
     // $result->getDateExpires();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //OTP ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

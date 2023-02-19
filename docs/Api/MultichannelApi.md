@@ -64,6 +64,8 @@ try {
     // $result->getInfo()->getPartsDeleted();
     // $result->getInfo()->getCreditReturned();
     // $result->getInfo()->getChannel();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
@@ -148,6 +150,8 @@ try {
     // $result->getInfo()->getParts();
     // $result->getInfo()->getCreditReturned();
     // $result->getInfo()->getChannel();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
@@ -302,6 +306,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\TemplateNotApprovedException $e) {
@@ -457,6 +463,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\TemplateNotApprovedException $e) {
@@ -620,6 +628,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\TemplateNotApprovedException $e) {
@@ -780,6 +790,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ChannelNotActiveException $e) {
     //Code for Channel not active
 } catch (Smscx\Client\Exception\TemplateNotApprovedException $e) {

@@ -22,6 +22,8 @@ $country_iso = 'FR';
 try {
     $result = $smscx->getChannelPricingByCountryIso($channel, $traffic_type, $country_iso);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling AccountApi->getChannelPricingByCountryIso: ', $e->getMessage(), PHP_EOL;
 }

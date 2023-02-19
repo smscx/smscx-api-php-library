@@ -41,7 +41,7 @@ class GetRentStatusResponse implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $clientTypes = [
-        'info' => '\Smscx\Client\Model\InfoRentNumber'
+        'info' => '\Smscx\Client\Model\InfoRentStatus'
     ];
 
     /**
@@ -269,7 +269,7 @@ class GetRentStatusResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets info
      *
-     * @return \Smscx\Client\Model\InfoRentNumber
+     * @return \Smscx\Client\Model\InfoRentStatus
      */
     public function getInfo()
     {
@@ -279,7 +279,7 @@ class GetRentStatusResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets info
      *
-     * @param \Smscx\Client\Model\InfoRentNumber $info info
+     * @param \Smscx\Client\Model\InfoRentStatus $info info
      *
      * @return self
      */

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**msg_id** | **string** | Identifier of the receive message |
+**msg_id** | **string** | Identifier of the received message |
 **from** | **string** | The phone number that sent the SMS, in international E.164 format |
 **country_iso** | **string** | Two-letter country ISO of the phone number that sent the SMS |
 **to** | **string** | The short code or virtual phone number that received the SMS |

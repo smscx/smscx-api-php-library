@@ -42,6 +42,7 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $clientTypes = [
         'rent_id' => 'string',
+        'number_id' => 'string',
         'phone_number' => 'string',
         'country_iso' => 'string',
         'credit_returned' => 'float'
@@ -56,9 +57,10 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $clientFormats = [
         'rent_id' => 'uuid',
+        'number_id' => 'uuid',
         'phone_number' => null,
         'country_iso' => null,
-        'credit_returned' => null
+        'credit_returned' => 'decimal'
     ];
 
     /**
@@ -68,6 +70,7 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $clientNullables = [
         'rent_id' => false,
+		'number_id' => false,
 		'phone_number' => false,
 		'country_iso' => false,
 		'credit_returned' => false
@@ -150,6 +153,7 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'rent_id' => 'rentId',
+        'number_id' => 'numberId',
         'phone_number' => 'phoneNumber',
         'country_iso' => 'countryIso',
         'credit_returned' => 'creditReturned'
@@ -162,6 +166,7 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'rent_id' => 'setRentId',
+        'number_id' => 'setNumberId',
         'phone_number' => 'setPhoneNumber',
         'country_iso' => 'setCountryIso',
         'credit_returned' => 'setCreditReturned'
@@ -174,6 +179,7 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'rent_id' => 'getRentId',
+        'number_id' => 'getNumberId',
         'phone_number' => 'getPhoneNumber',
         'country_iso' => 'getCountryIso',
         'credit_returned' => 'getCreditReturned'
@@ -237,6 +243,7 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('rent_id', $data ?? [], null);
+        $this->setIfExists('number_id', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('country_iso', $data ?? [], null);
         $this->setIfExists('credit_returned', $data ?? [], null);
@@ -282,6 +289,21 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['rent_id'])) {
             $invalidProperties[] = "invalid value for 'rent_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
+        }
+
+        if ($this->container['number_id'] === null) {
+            $invalidProperties[] = "'number_id' can't be null";
+        }
+        if ((mb_strlen($this->container['number_id']) > 36)) {
+            $invalidProperties[] = "invalid value for 'number_id', the character length must be smaller than or equal to 36.";
+        }
+
+        if ((mb_strlen($this->container['number_id']) < 36)) {
+            $invalidProperties[] = "invalid value for 'number_id', the character length must be bigger than or equal to 36.";
+        }
+
+        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['number_id'])) {
+            $invalidProperties[] = "invalid value for 'number_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
         }
 
         if ($this->container['phone_number'] === null) {
@@ -351,6 +373,45 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['rent_id'] = $rent_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_id
+     *
+     * @return string
+     */
+    public function getNumberId()
+    {
+        return $this->container['number_id'];
+    }
+
+    /**
+     * Sets number_id
+     *
+     * @param string $number_id Unique identifier of phone number
+     *
+     * @return self
+     */
+    public function setNumberId($number_id)
+    {
+        if ((mb_strlen($number_id) > 36)) {
+            throw new \InvalidArgumentException('invalid length for $number_id when calling InfoCancelRent., must be smaller than or equal to 36.');
+        }
+        if ((mb_strlen($number_id) < 36)) {
+            throw new \InvalidArgumentException('invalid length for $number_id when calling InfoCancelRent., must be bigger than or equal to 36.');
+        }
+        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $number_id))) {
+            throw new \InvalidArgumentException("invalid value for \$number_id when calling InfoCancelRent., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
+        }
+
+
+        if (is_null($number_id)) {
+            throw new \InvalidArgumentException('non-nullable number_id cannot be null');
+        }
+
+        $this->container['number_id'] = $number_id;
 
         return $this;
     }
@@ -433,7 +494,7 @@ class InfoCancelRent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets credit_returned
      *
-     * @param float $credit_returned Credit returned to your account balance
+     * @param float $credit_returned Credit returned to your account balance. Please note that the one-time setup cost (provision cost) is not returned, only the rent cost of the number
      *
      * @return self
      */

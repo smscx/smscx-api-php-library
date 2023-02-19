@@ -21,6 +21,8 @@ try {
     $result = $smscx->createOriginator($originator);
     print_r($result);
     // $result->getInfo->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\DuplicateValueException $e) {
     //Code for duplicate value    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

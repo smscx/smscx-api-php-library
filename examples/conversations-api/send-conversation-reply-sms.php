@@ -23,6 +23,8 @@ $conversation_reply_sms_request = [
 try {
     $result = $smscx->sendConversationReplySms($conversation_id, $conversation_reply_sms_request);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Conversation ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

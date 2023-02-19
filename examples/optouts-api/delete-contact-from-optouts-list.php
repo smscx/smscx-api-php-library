@@ -20,6 +20,8 @@ $optout_id = 458;
 try {
     $result = $smscx->deleteContactFromOptoutsList($optout_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Optout ID not found    
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {

@@ -30,6 +30,8 @@ try {
     // $result->getInfo()->getTotalPhoneNumbers();
     // $result->getInfo()->getPhoneNumbersByCountry();
     // $result->getInfo()->getInvalid();    
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\InvalidPhoneNumberException $e) {

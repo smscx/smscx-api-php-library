@@ -4,8 +4,18 @@
 
 The SMS Connexion API PHP library provides convenient access to the SMS API of SMS.CX from applications written in the PHP language.
 
-Using this library you can send SMS, create groups of contacts, import contacts, validate phone numbers, lookup phone numbers, generate OTP, create short links, and more.
-  
+Using this library you can:
+- send SMS (transactional, promotional) - single or bulk SMS
+- receive SMS
+- rent phone numbers
+- validate phone numbers
+- lookup phone numbers (HLR)
+- send OTP SMS (2FA)
+- create groups of contacts
+- import contacts
+- create short links
+- and more
+ 
 For more information, please visit [https://sms.cx](https://sms.cx)
 
 Content:
@@ -22,8 +32,7 @@ Content:
 
 ### Requirements
 
-PHP 7.4 and later.
-Works with PHP 8.0.
+PHP 7.4 and later (works with PHP 8.0).
 
 ### Composer
 
@@ -155,6 +164,8 @@ try {
     $result = $smscx->sendSms($send_sms_message_request);
     print_r($result);
     //$result->getInfo()->getTotalCost();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\NoCoverageException $e) {
     //Code for No coverage
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -221,7 +232,9 @@ try {
     $result = $smscx->sendSms($send_sms_message_request);
     print_r($result);
     //$result->getInfo()->getTotalCost();
-    //$result->getInfo()->getInvalid();    
+    //$result->getInfo()->getInvalid();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\NoCoverageException $e) {
     //Code for No coverage
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -451,17 +464,21 @@ Method | Description
 | ------------- | -------------
 | [**getBulkLookupStatus()**](docs/Api/NumbersApi.md#getbulklookupstatus) | Get Bulk Lookup result
 | [**getSingleLookupStatus()**](docs/Api/NumbersApi.md#getsinglelookupstatus) | Get Single Lookup result
+| [**getBulkLookupCampaigns()**](docs/Api/NumbersApi.md#getbulklookupcampaigns) | Get list of bulk lookup campaigns
 | [**lookupNumber()**](docs/Api/NumbersApi.md#lookupnumber) 💰 | Lookup number
 | [**lookupNumbers()**](docs/Api/NumbersApi.md#lookupnumbers) 💰 | Lookup numbers in bulk
+| [**exportNumberLookupReportToCSV()**](docs/Api/NumbersApi.md#exportnumberlookupreporttocsv) | Export number lookup campaign to CSV
+| [**exportNumberLookupReportToXLSX()**](docs/Api/NumbersApi.md#exportnumberlookupreporttoxlsx) | Export number lookup campaign to XLSX
 | [**validateNumber()**](docs/Api/NumbersApi.md#validatenumber) | Validate number
 | [**validateNumbers()**](docs/Api/NumbersApi.md#validatenumbers) | Validate numbers in bulk
-| [**getAvailableNumbers()**](docs/Api/NumbersApi.md#getAvailableNumbers) | Get available numbers for rent |
-| [**rentNumber()**](docs/Api/NumbersApi.md#rentNumber) 💰 | Rent phone number |
-| [**cancelRent()**](docs/Api/NumbersApi.md#cancelRent) | Cancel rent for phone number |
-| [**renewRent()**](docs/Api/NumbersApi.md#renewRent) 💰 | Renew rent for phone number |
-| [**getRentStatus()**](docs/Api/NumbersApi.md#getRentStatus) | Get status of rent |
-| [**getRentedNumbers()**](docs/Api/NumbersApi.md#getRentedNumbers) | Get list of your rented numbers |
-| [**getInboundSms()**](docs/Api/NumbersApi.md#getInboundSms) | Get inbound SMS from rented number |
+| [**getAvailableNumbers()**](docs/Api/NumbersApi.md#getAvailableNumbers) | Get available numbers for rent 
+| [**rentNumber()**](docs/Api/NumbersApi.md#rentNumber) 💰 | Rent phone number 
+| [**cancelRent()**](docs/Api/NumbersApi.md#cancelRent) | Cancel rent for phone number 
+| [**renewRent()**](docs/Api/NumbersApi.md#renewRent) 💰 | Renew rent for phone number 
+| [**getRentStatus()**](docs/Api/NumbersApi.md#getRentStatus) | Get status of rent 
+| [**getRentedNumbers()**](docs/Api/NumbersApi.md#getRentedNumbers) | Get list of your rented numbers 
+| [**getInboundSms()**](docs/Api/NumbersApi.md#getInboundSms) | Get inbound SMS from rented number 
+| [**editRentSettings()**](docs/Api/NumbersApi.md#editrentsettings) | Edit settings for active rent 
 
 
 ### Class OauthApi
@@ -618,7 +635,7 @@ dev@sms.cx
 
 ## About this package
 
-- Client library version: `0.1.0`
+- Client library version: `0.1.1`
 - API version: `1.0.2`
 
 ## License

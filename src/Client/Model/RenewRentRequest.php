@@ -355,7 +355,7 @@ class RenewRentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets auto_renew
      *
-     * @param bool|null $auto_renew Auto renew the rental of the phone number at the end of the rental period
+     * @param bool|null $auto_renew Auto renew the rent of the phone number at the end of the rental period
      *
      * @return self
      */
@@ -384,7 +384,7 @@ class RenewRentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets callback_url
      *
-     * @param string|null $callback_url Callback URL (or webhook) to get the received SMS on the rented phone number
+     * @param string|null $callback_url Callback URL (or webhook) to get the SMS that is received on the rented phone number (inbound SMS)
      *
      * @return self
      */

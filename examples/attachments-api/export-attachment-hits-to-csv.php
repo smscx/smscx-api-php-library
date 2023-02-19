@@ -20,6 +20,8 @@ $attachment_id = 'KgTX';
 try {
     $result = $smscx->exportAttachmentHitsToCSV($attachment_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Attachment ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

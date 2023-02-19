@@ -70,6 +70,8 @@ try {
     // $result->getInfo()->getTotalDuplicates();
     // $result->getInfo()->getPhoneNumbers();
     // $result->getInfo()->getInvalid();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
@@ -149,6 +151,8 @@ try {
     print_r($result);
     // $result->getInfo()->getId();
     // $result->getInfo()->getName();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\DuplicateValueException $e) {
@@ -226,6 +230,8 @@ try {
     // $result->getInfo()->getId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID or PhoneNumber ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -300,6 +306,8 @@ try {
     // $result->getInfo()->getId();
     // $result->getInfo()->getName();
     // $result->getInfo()->getTotalPhoneNumbers();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -371,6 +379,8 @@ try {
     print_r($result);
     // $result->getInfo()->getId();
     // $result->getInfo()->getName();    
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -442,6 +452,8 @@ $group_id = 2245;
 try {
     $result = $smscx->exportGroupToCSV($group_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -513,6 +525,8 @@ $group_id = 2245;
 try {
     $result = $smscx->exportGroupToXLSX($group_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -609,6 +623,8 @@ try {
         // $v->getCustomFields();
         // $v->getDateAdded();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {
@@ -763,6 +779,8 @@ try {
     print_r($result);
     // $result->getInfo()->getId();
     // $result->getInfo()->getGroupId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID or Phone number ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

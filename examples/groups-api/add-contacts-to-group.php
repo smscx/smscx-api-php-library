@@ -31,6 +31,8 @@ try {
     // $result->getInfo()->getTotalDuplicates();
     // $result->getInfo()->getPhoneNumbers();
     // $result->getInfo()->getInvalid();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

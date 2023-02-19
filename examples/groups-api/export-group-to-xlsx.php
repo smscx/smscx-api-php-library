@@ -19,6 +19,8 @@ $group_id = 2245;
 try {
     $result = $smscx->exportGroupToXLSX($group_id);
     print_r($result);
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Group ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

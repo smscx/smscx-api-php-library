@@ -25,6 +25,8 @@ try {
     $result = $smscx->updateTemplate($template_id, $templates_update_request);
     print_r($result);
     // $result->getInfo()->getId();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Template ID not found    
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {

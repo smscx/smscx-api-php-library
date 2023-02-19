@@ -16,10 +16,14 @@ $smscx = new Smscx\Client\Api\NumbersApi(
 );
 
 $rent_id = '471ddea7-930c-49e8-8e99-2683834dd92e';
+//$limit = '100'; // int | A limit on the number of objects to be returned
+//$next = null; // string | The next token used to retrieve additional data
+//$previous = null; // string | The previous token used to retrieve additional data
 
 try {
     $result = $smscx->getInboundSms($rent_id);
     print_r($result);
+    // $result->getInfo()->getRentId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
     foreach ($result->getData() as $k => $v) {
@@ -31,6 +35,8 @@ try {
         // $v->getCost();
         // $v->getReceivedAt();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {

@@ -22,6 +22,8 @@ try {
     print_r($result);
     // $result->getInfo()->getId();
     // $result->getInfo()->getName();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\DuplicateValueException $e) {

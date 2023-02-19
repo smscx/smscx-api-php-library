@@ -40,6 +40,8 @@ try {
         // $v->getDatetimeScheduled();
         // $v->getStatus();
     } 
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling ReportsApi->getCampaignsList: ', $e->getMessage(), PHP_EOL;
 }

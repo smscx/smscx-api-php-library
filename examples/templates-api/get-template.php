@@ -31,6 +31,8 @@ try {
         // $v->getApproved();
         // $v->getLocked();
     }    
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Template ID not found    
 } catch (Smscx\Client\Exception\ApiException $e) {

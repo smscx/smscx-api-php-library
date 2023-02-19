@@ -26,6 +26,8 @@ try {
         // $v->getApproved();
         // $v->getCreatedAd();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling OriginatorsApi->getOriginatorsList: ', $e->getMessage(), PHP_EOL;
 }

@@ -54,6 +54,8 @@ try {
         // $v->getCity();
         // $v->getDatetime();
     }    
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Attachment ID not found     
 } catch (Smscx\Client\Exception\ApiException $e) {

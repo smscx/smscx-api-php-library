@@ -59,6 +59,8 @@ try {
         // $v->getParts();
         // $v->getTextAnalysis();
     }
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\NoCoverageException $e) {
     //Code for No coverage
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {

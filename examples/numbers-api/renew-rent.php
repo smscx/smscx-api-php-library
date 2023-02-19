@@ -17,7 +17,7 @@ $smscx = new Smscx\Client\Api\NumbersApi(
 
 $rent_id = '471ddea7-930c-49e8-8e99-2683834dd92e';
 $renew_rent_request = [
-    'rentPeriod' => 7,
+    'rentPeriod' => 30,
     'autoRenew' => false,
     'callbackUrl' => 'https://webhook-url/receive-inbound-sms',
 ];
@@ -26,28 +26,25 @@ try {
     $result = $smscx->renewRent($rent_id, $renew_rent_request);
     print_r($result);
     // $result->getInfo()->getRentId();
-    // $result->getInfo()->getRentCost();
-    // $result->getInfo()->getSetupCost();
-    // $result->getInfo()->getRentPeriod();
-    // $result->getInfo()->getRentStart();
-    // $result->getInfo()->getRentEnd();
+    // $result->getInfo()->getNumberId();
     // $result->getInfo()->getPhoneNumber();
     // $result->getInfo()->getCountryIso();
-    // $result->getInfo()->getNetworkOperator();
+    // $result->getInfo()->getRentStart();
+    // $result->getInfo()->getRentEnd();  
+    // $result->getInfo()->getRentCost();
     // $result->getInfo()->getAutoRenew();
-    // $result->getInfo()->getSms();
-    // $result->getInfo()->getVoice();
-    // $result->getInfo()->getMinRent();
-    // $result->getInfo()->getMaxRent();
-    // $result->getInfo()->getRentalCost();
-    // $result->getInfo()->getInboundSmsCost();
     // $result->getInfo()->getCallbackUrl();
+    // $result->getInfo()->getDatetime();
+} catch (InvalidArgumentException $e) {
+    //Code for Invalid argument provided
 } catch (Smscx\Client\Exception\InvalidRequestException $e) {
     //Code for Invalid request    
 } catch (Smscx\Client\Exception\ResourceNotFoundException $e) {
     //Rent ID not found   
 } catch (Smscx\Client\Exception\AccessDeniedException $e) {
     //Number rent cannot be renewed (it won't be available for rent in the future)
+} catch (Smscx\Client\Exception\InsufficientBalanceException $e) {
+    //Code for Insufficient balance	
 } catch (Smscx\Client\Exception\ApiException $e) {
     echo 'Exception when calling NumbersApi->renewRent: ', $e->getMessage(), PHP_EOL;
 }
